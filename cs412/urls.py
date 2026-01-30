@@ -19,5 +19,6 @@ from django.urls import include, path
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('hw/', include('hw.urls')),  #newly added
+    path('hw/', include('hw.urls')),  #video example 
+    path('quotes/', include('quotes.urls')),  #assignment one
 ]
