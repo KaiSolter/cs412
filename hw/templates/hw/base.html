@@ -1,0 +1,19 @@
+{% load static %}
+<html>
+  <head>
+    <title>Hello, World!</title>
+    <link rel="stylesheet" href="{% static 'styles.css' %}" />
+  </head>
+  <body>
+    <nav>
+      <a href="{% url 'home_page' %}">Home</a> |
+      <a href="{% url 'about_page' %}">About</a>
+    </nav>
+    {% block content %} {% endblock %}
+    <footer>
+      The current time is {{time}} This page has been brough to you by the
+      <br />
+      letters {{lette1}} and {{lette2}} and the number {{number}}.
+    </footer>
+  </body>
+</html>
