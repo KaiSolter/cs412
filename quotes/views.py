@@ -1,3 +1,7 @@
+# File: quotes/views.py
+# Author: Kai Solter (ksolter@bu.edu), 1/30/2026 
+# Description: Views for Paul Morphy Quotes 
+
 from django.shortcuts import render
 
 import random
@@ -13,7 +17,7 @@ def quote(request):
     return render(request, template_name, {"quote": random.choice(quotes), "image": random.choice(images)})
 
 def show_all(request):
-    '''Respond to the show all quotes request'''
+    '''Respond to the show all request'''
     template_name = "quotes/show_all.html"
     return render(request, template_name, {"quotes": quotes, "images": images})
 

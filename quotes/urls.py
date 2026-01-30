@@ -1,3 +1,6 @@
+# File: quotes/urls.py
+# Author: Kai Solter (ksolter@bu.edu), 1/30/2026 
+# Description: URL patterns for Paul Morphy Quotes 
 from django.urls import path
 from quotes import views
 
