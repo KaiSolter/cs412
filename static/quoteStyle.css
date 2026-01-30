@@ -1,0 +1,278 @@
+body {
+    background-color: #d18f8f;
+    color: #DCD7C9;
+    font-family: arial;
+}
+
+p {
+    font-size: 1.4em; 
+    background-color: #3f4f44;
+    border: 2px solid rgb(0, 0, 0);
+    width: 80%;
+    text-align: center;
+    margin : 10px auto;
+    padding: 5px;
+}
+
+h1,h2,h3,h4,h5{
+    font-size: 2.5em;
+    font-weight: normal;
+    background: #3f4f44;
+    margin: 10px auto;
+    width: 80%;
+    border: 2px solid rgb(0, 0, 0);
+    text-align: center;
+    margin-bottom : 10px;
+}
+
+a, a:visited {
+    color: slategrey;
+    text-decoration: none;
+}
+
+a:hover {
+    color: darkblue;
+    text-decoration: none;
+    background-color: white;
+    /* font-weight: bold; */
+}
+
+body {
+    max-width: 960px;
+    margin: 20px auto;
+    padding: 20px auto;
+}
+
+header {
+    width: 100%;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    background:aliceblue;
+    position: fixed;
+    top: 0px;
+    z-index: 999;
+    /* padding-right: 50px auto; */
+}
+
+footer {
+    width: 100%;
+    background:rgb(50, 50, 50);
+    position: fixed;
+    bottom: 0px;
+}
+
+
+.wrapper {              /* centering and margin around whole wrapper element */
+    border: 2px solid;
+    max-width: 100%;
+    position: relative;
+    top: 50px;
+    scroll-padding-top: 100px;
+    /* scroll-padding-bottom: 100px; */
+    padding-bottom: 50px;
+    
+    /* top:100px; */
+    /* bottom: 100px; */
+}
+
+
+div.wrapper h1 {
+    text-align: center;
+    color: darkblue;
+    margin: 10px auto;
+    font-size: 2.4 em; 
+
+}
+
+div.wrapper h2 {
+    text-align: left;
+    color: darkblue;
+    margin: 5px auto;
+    font-size: 2 em; 
+}
+
+
+section {
+    border: 2px solid darkblue;    /* border around each event */
+    position: relative;
+    padding-bottom: 4px;
+}
+.image-container {
+    width: 400px; 
+    height: 500px; 
+    overflow: hidden;
+    margin: 10px auto;
+    border: 5px solid #000000;
+}
+
+.image-container img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover; 
+}
+
+.contentBox {
+    width : 80%;
+    padding: 10px;
+    margin: 10px auto;
+    border: 2px solid rgb(0, 0, 0);
+    background-color: #A27B5C;
+    
+}
+
+.navbox {
+    width : 80%;
+}
+
+nav {
+    justify-self: end;
+    background: #2c3930;
+    padding: 10px 20px;
+    border-radius: 8px;
+    box-shadow: 2px 2px 8px rgba(0, 0, 0, 0.2);
+    color: #DCD7C9;
+}
+
+nav li {
+    display: inline-block;
+    margin-left: 20px;
+    list-style: none;
+}
+
+nav button {
+    background: none;
+    color: white;
+    font-family: Arial;
+    cursor: pointer; 
+    border: 0;
+    font-size: 1.2em;
+    padding: 8px 15px;
+    border-radius: 4px;
+}
+
+nav button:hover {
+    background-color: rgba(255, 255, 255, 0.2);
+    transform: scale(1.2);
+}
+
+.mc-table {
+    display: table;
+    width: 100%;
+    table-layout: fixed;
+}
+
+
+.mc-table-head {
+    border: 1px dashed darkblue;    /*border around each row */
+    display: table-row;
+    font-size: 1.2em;
+}
+
+.mc-table-head .detail {
+    display: table-cell;
+    color:darkblue;
+    font-weight: bold;
+    background-color: white;
+    padding: 5px;
+    position: relative;
+   
+}
+
+.mc-table-row  {
+    display: table-row;
+    border: 1px dashed darkblue;    /*border around each row */
+    background-color: white;
+}
+
+
+.mc-table-row .detail {
+    color:darkblue;
+    display: table-cell;
+   
+    padding: 5px;
+}
+
+.mc-table-row .detail img {
+    max-height: 75px;
+    align-content: right;
+}
+
+/* must have no space before :hover */
+.mc-table-row:hover {
+    background-color: aliceblue;    
+    border: 1px solid;
+}
+
+.site-form {
+    margin-top: 10px;
+    /* border: 2px solid darkblue; */
+    padding: 10px;
+}
+
+/* style the forms with class site-form */
+.site-form input, .site-form textarea, .site-form select {
+    display: block;
+    margin: 5px 0 0 0;
+    padding: 5px;
+}
+
+/* style the submit button ; didn't quite work?? */
+.site-form input [type="submit"] {
+    background: slategray;
+    border: 0;
+    color: fff;
+    font-size: 1.2em;
+    border-radius: 4px;
+    margin: 5px 0;
+}
+
+
+/* style the help text in the forms */
+.helptext, .helptext.ul {
+    margin-top: 0 auto;
+    bottom: 20px;
+    color: #bbb;
+    font-size: 0.9em;
+}
+
+/* style the error list in the forms validation */
+.errorlist li {
+    padding: 10px;
+    list-style-type: none;
+    border: 1px solid crimson;
+    color: crimson;
+    margin: 10px 0;
+}
+
+
+.errorlist {
+    padding: 0px;
+}
+
+
+/* responsive styles when width is less than 1400px */
+@media screen and (max-width: 560px) {
+    header h1 {
+        size: 0.8em;
+    }
+
+    nav li {
+        display: block;
+        margin-left: 0px;
+        font-size: 14px;
+        width: 100%;
+    }
+    
+    nav button {
+        background: none;
+        color: slategray;
+        font-family: Arial;
+        cursor: pointer; 
+        border: 0;
+        font-size: 20px;
+    }
+    /* on mobile, display image as max 95% of available width*/
+    img {
+        max-width: 95%;
+    }
+}

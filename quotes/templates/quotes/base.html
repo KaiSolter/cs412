@@ -1,19 +1,18 @@
 {% load static %}
 <html>
   <head>
-    <title>Quotes!</title>
-    <link rel="stylesheet" href="{% static 'styles.css' %}" />
+    <title>Paul Morphy Quotes!</title>
+    <link rel="stylesheet" href="{% static 'quoteStyle.css' %}" />
   </head>
   <body>
-    <nav>
-      <a href="{% url 'quote' %}">Quote</a> |
-      <a href="{% url 'show_all' %}">Show All</a> |
-      <a href="{% url 'about' %}">About</a>
-    </nav>
+    <div class="navbox">
+      <nav>
+        <a href="{% url 'quote' %}">Quote</a> |
+        <a href="{% url 'show_all' %}">Show All</a> |
+        <a href="{% url 'about' %}">About</a>
+      </nav>
+    </div>
     {% block content %} {% endblock %}
-    <footer>
-      Kai Solter <br />
-      Page generated at {{time}}
-    </footer>
+    <footer>page by Kai Solter <br /></footer>
   </body>
 </html>

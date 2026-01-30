@@ -1,7 +1,9 @@
 {% extends "quotes/base.html" %} {% block content %}
-<h1>Quote</h1>
-<p>{{ quote }}</p>
-<div class="image-container">
-  <img src="{{ image }}" alt="Image of Paul Morphy" />
+<div class="contentBox">
+  <h1>Random Quote!</h1>
+  <div class="image-container">
+    <img src="{{ image }}" alt="Image of Paul Morphy" />
+  </div>
+  <p>{{ quote }}</p>
+  {% endblock %}
 </div>
-{% endblock %}
