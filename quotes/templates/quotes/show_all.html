@@ -1,3 +1,12 @@
 {% extends "quotes/base.html" %} {% block content %}
-<h1>Show all</h1>
-{% endblock %}
+<h1>All Paul Morphy Quotes</h1>
+{% for quote in quotes %}
+<p>{{ quote }}</p>
+{% endfor %}
+
+<h1>All Images of Paul Morhpy</h1>
+{% for image in images %}
+<div class="image-container">
+  <img src="{{ image }}" alt="Image of Paul Morphy" />
+</div>
+{% endfor %} {% endblock %}
