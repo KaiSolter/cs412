@@ -21,4 +21,5 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('hw/', include('hw.urls')),  #video example 
     path('quotes/', include('quotes.urls')),  #assignment one
+    path('formdata/', include('formdata.urls')),  #example two
 ]
