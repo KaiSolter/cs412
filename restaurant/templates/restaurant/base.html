@@ -1,0 +1,19 @@
+<!-- File: restaurant/templates/restaurant/base.html -->
+<!-- Author: Kai Solter (ksolter@bu.edu), 2/3/2026 -->
+<!--Description: Base template for Restaurant app -->
+
+{% load static %}
+
+<html>
+  <head>
+    <title>Restaurant</title>
+    <link rel="stylesheet" href="{% static 'restaurant.css' %}" />
+  </head>
+  <body>
+    <nav>
+      <a href="{% url 'main' %}">Main</a> |
+      <a href="{% url 'order' %}">Order</a> |
+    </nav>
+    {% block content %} {% endblock %}
+  </body>
+</html>

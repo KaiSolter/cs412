@@ -1,0 +1,59 @@
+<!-- File: restaurant/templates/restaurant/order_confirmation.html -->
+<!-- Author: Kai Solter (ksolter@bu.edu), 2/3/2026 -->
+<!--Description: Order confirmation template for Restaurant app -->
+{% extends "restaurant/base.html" %} {% block content %}
+<div>
+  <h1>Order Confirmation for {{ name }}</h1>
+
+  <div>
+    <p>You Selected Appetizers:</p>
+    <ul>
+      {% for app in apps %}
+      <li>{{ app }}</li>
+      {% endfor %}
+    </ul>
+  </div>
+  <!--my formatter prettier was messing up django so i added an ignore-->
+  <!-- prettier-ignore -->
+  <div>
+    <p>You Selected Entrees:</p>
+    <ul>
+      {% for entree in entrees %}
+        <li>{{ entree }}</li>
+        {% if ordered_toppings and entree == "pizza" %}
+          {% for topping in toppings %}
+          <p> With toppings:</p>  
+          <ul>
+              <li>{{ topping }}</li>
+            </ul>
+          {% endfor %}
+        {% endif %}
+      {% endfor %}
+    </ul>
+  </div>
+
+  {% if ordered_special %}
+  <div>
+    <p>You Ordered Today's Special Enjoy!</p>
+    <ul>
+      {% for item in special %}
+      <li>{{ item }}</li>
+      {% endfor %}
+    </ul>
+  </div>
+  {% endif %}
+
+  <div>
+    <p>You Selected Beverages:</p>
+    <ul>
+      {% for beverage in beverages %}
+      <li>{{ beverage }}</li>
+      {% endfor %}
+    </ul>
+  </div>
+
+  <p>With special instructions: {{ instructions }}</p>
+  <p>Thank you for your order!</p>
+  <p>Your total comes out to: ${{ total }}</p>
+</div>
+{% endblock %}

@@ -1,0 +1,159 @@
+/* Restaurant App Styles */
+
+body {
+  font-family: 'Georgia', serif;
+  background-color: #f5f5dc;
+  color: #333;
+  margin: 0;
+  padding: 0;
+  line-height: 1.6;
+}
+
+nav {
+  background-color: #8b4513;
+  padding: 15px 30px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+}
+
+nav a {
+  color: #fff;
+  text-decoration: none;
+  font-weight: bold;
+  font-size: 18px;
+  margin: 0 10px;
+  transition: color 0.3s;
+}
+
+nav a:hover {
+  color: #ffd700;
+}
+
+h1 {
+  color: #8b4513;
+  text-align: center;
+  font-size: 2.5em;
+  margin: 30px 0;
+  text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.1);
+}
+
+h2 {
+  color: #654321;
+  margin-top: 20px;
+}
+
+form {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 30px;
+  background-color: #fff;
+  border-radius: 10px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+fieldset {
+  border: 2px solid #8b4513;
+  border-radius: 8px;
+  padding: 20px;
+  margin-bottom: 25px;
+  background-color: #faf8f3;
+}
+
+legend {
+  color: #8b4513;
+  font-weight: bold;
+  font-size: 1.3em;
+  padding: 0 10px;
+}
+
+label {
+  display: block;
+  margin: 10px 0;
+  font-size: 1.1em;
+  cursor: pointer;
+  transition: color 0.2s;
+}
+
+label:hover {
+  color: #8b4513;
+}
+
+input[type="checkbox"] {
+  margin-right: 10px;
+  cursor: pointer;
+  transform: scale(1.2);
+}
+
+input[type="text"] {
+  width: 100%;
+  padding: 10px;
+  font-size: 1em;
+  border: 2px solid #8b4513;
+  border-radius: 5px;
+  box-sizing: border-box;
+  margin-top: 5px;
+}
+
+input[type="submit"] {
+  background-color: #8b4513;
+  color: white;
+  padding: 15px 40px;
+  font-size: 1.2em;
+  font-weight: bold;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  margin-top: 20px;
+  transition: background-color 0.3s, transform 0.2s;
+}
+
+input[type="submit"]:hover {
+  background-color: #654321;
+  transform: scale(1.05);
+}
+
+p {
+  font-size: 1.1em;
+  margin: 15px 0 5px 0;
+  font-weight: bold;
+  color: #654321;
+}
+
+/* Order Confirmation Styles */
+div > div {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 20px;
+  background-color: #fff;
+  border-radius: 10px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+ul {
+  list-style-type: none;
+  padding-left: 0;
+}
+
+ul li {
+  background-color: #faf8f3;
+  padding: 10px 15px;
+  margin: 8px 0;
+  border-left: 4px solid #8b4513;
+  border-radius: 4px;
+}
+
+ul ul {
+  margin-left: 20px;
+  margin-top: 5px;
+}
+
+ul ul li {
+  background-color: #fff8dc;
+  border-left: 4px solid #cd853f;
+  font-size: 0.95em;
+}
+
+/* Container styling */
+body > div {
+  padding: 20px;
+  min-height: 80vh;
+}

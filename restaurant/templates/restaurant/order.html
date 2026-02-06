@@ -1,0 +1,54 @@
+<!-- File: restaurant/templates/restaurant/order.html -->
+<!-- Author: Kai Solter (ksolter@bu.edu), 2/3/2026 -->
+<!--Description: Order page template for Restaurant app -->
+{% extends "restaurant/base.html" %} {% block content %}
+
+<div>
+  <h1>Place Your Order</h1>
+    <form action="{% url 'submit_order' %}" method="post">
+      {% csrf_token %} 
+
+    <fieldset>
+    <legend>Appetizers:</legend>
+    <label><input type="checkbox" name="apps" value="fries"> $5 Fries</label><br>
+    <label><input type="checkbox" name="apps" value="coleslaw"> $5 Coleslaw</label><br>
+    <label><input type="checkbox" name="apps" value="fruit"> $5 Assorted Fruit</label><br>
+  </fieldset>
+
+    <fieldset>
+    <legend>Entrees:</legend>
+    <label><input type="checkbox" name="entrees" value="pizza"> $10 Pizza</label><br>
+      <label style="margin-left: 30px;"><input type="checkbox" name="toppings" value="pepperoni"> Pepperoni</label><br>
+      <label style="margin-left: 30px;"><input type="checkbox" name="toppings" value="mushrooms"> Mushrooms</label><br>
+      <label style="margin-left: 30px;"><input type="checkbox" name="toppings" value="olives"> Olives</label><br>
+    <label><input type="checkbox" name="entrees" value="burger"> $10 Burger</label><br>
+    <label><input type="checkbox" name="entrees" value="pasta"> $10 Pasta</label><br>
+  </fieldset>
+
+   <fieldset>
+      <Legend>Today's Special: {{ daily_special }}</Legend>
+        <label><input type="checkbox" name="special" value="{{ daily_special }}"> $12 {{ daily_special }}</label><br>
+  </fieldset>
+
+  <fieldset>
+    <legend>Beverages:</legend>
+    <label><input type="checkbox" name="beverages" value="soda"> $3 Soda</label><br>
+    <label><input type="checkbox" name="beverages" value="tea"> $3 Tea</label><br>
+    <label><input type="checkbox" name="beverages" value="coffee"> $3 Coffee</label><br>
+  </fieldset>
+    
+    <p> Special Instructions: </p>
+    <input type="text" name="instructions" />
+
+    <p> Order Name: </p>
+    <input type="text" name="order_name" />
+
+    <p> Phone Number: </p>
+    <input type="text" name="phone_number" />
+
+    <input type="submit" value="Order" />
+
+</div>
+
+  {% endblock %}
+</div>
