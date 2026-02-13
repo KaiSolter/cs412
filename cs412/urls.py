@@ -23,4 +23,5 @@ urlpatterns = [
     path('quotes/', include('quotes.urls')),  #assignment one
     path('formdata/', include('formdata.urls')),  #example two
     path('restaurant/', include('restaurant.urls')),  #assignment two
+    path('blog/', include('blog.urls')),  #example three
 ]
