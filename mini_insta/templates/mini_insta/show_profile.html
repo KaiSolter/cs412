@@ -1,0 +1,18 @@
+<!-- File: mini_insta/templates/mini_insta/show_profile.html -->
+<!-- Author: Kai Solter (ksolter@bu.edu), 2/13/2026 -->
+<!--Description: Display single profile for mini_insta app -->
+
+{% extends 'mini_insta/base.html' %} {% block content%}
+<h1>{{profile.username}}</h1>
+<div>
+  <div>
+    <div>
+      <h2>{{ profile.display_name }}<h2>
+    </div>
+    <img src="{{profile.profile_image_url}}" alt="" />
+    <p>{{profile.bio_text}}</p>
+  </div>
+  <p>{{profile.join_date}}</p>
+  <hr />
+</div>
+{% endblock %}
