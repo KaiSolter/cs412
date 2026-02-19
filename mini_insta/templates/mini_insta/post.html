@@ -1,0 +1,22 @@
+<!-- File: mini_insta/templates/mini_insta/post.html -->
+<!-- Author: Kai Solter (ksolter@bu.edu), 2/13/2026 -->
+<!--Description: Display single profile for mini_insta app -->
+
+{% extends 'mini_insta/base.html' %} {% block content%}
+
+<div>
+  <h2>Post by {{ post.profile.username }}</h2>
+  <div>
+    {% for photo in post.get_all_photos %}
+    <img src="{{photo.image_url}}" alt="" />
+    {% empty %}
+    <img
+      src="https://upload.wikimedia.org/wikipedia/commons/a/a3/Image-not-found.png?20210521171500"
+      alt=""
+    />
+    {% endfor %}
+    <p>{{post.caption}}</p>
+    <p><small>{{post.timestamp}}</small></p>
+  </div>
+</div>
+{% endblock %}

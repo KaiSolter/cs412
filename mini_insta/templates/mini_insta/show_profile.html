@@ -14,5 +14,23 @@
   </div>
   <p>{{profile.join_date}}</p>
   <hr />
+  <div>
+    <h2>Posts</h2>
+    {% for post in profile.get_all_posts %}
+    <div>
+      {% with first_photo=post.get_all_photos.first %}
+      {% if first_photo %}
+      <a href="{% url 'post' post.pk %}">
+        <img src="{{first_photo.image_url}}" alt="" />
+      </a>
+      {% else %}
+      <a href="{% url 'post' post.pk %}">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/a/a3/Image-not-found.png?20210521171500" alt="" />
+      </a>
+      {% endif %}
+      {% endwith %}
+       <p>{{post.caption}}</p>
+    </div>
+    {% endfor %}
 </div>
 {% endblock %}
