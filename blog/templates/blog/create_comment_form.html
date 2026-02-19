@@ -1,6 +1,6 @@
 {% extends "blog/base.html" %} {% block content %}
-<h1>Create a new article</h1>
-<form action="{% url 'create_article' %}" method="POST">
+<h1>Create a new comment about {{article.title}}</h1>
+<form action="" method="POST">
   {% csrf_token %}
   <table>
     {{form.as_table}}

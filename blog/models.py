@@ -17,7 +17,12 @@ class Article(models.Model):
     def get_absolute_url(self):
         '''返回文章详情页的URL'''
         return reverse('article', kwargs={'pk': self.pk})
-    
+
+    def get_all_comments(self):
+        '''返回文章的所有评论'''
+        comments = Comment.objects.filter(article=self)  
+        return comments
+      
 class Comment(models.Model):
     '''评论模型'''
     article = models.ForeignKey(Article, on_delete=models.CASCADE)
@@ -28,3 +33,4 @@ class Comment(models.Model):
     def __str__(self):
         '''返回评论作者和文章标题'''
         return f'{self.text}'
+    
