@@ -1,3 +1,6 @@
+# File: mini_insta/views.py
+# Author: Kai Solter (ksolter@bu.edu), 2/13/2026 
+# Description: Views for mini_insta app 
 from django.shortcuts import render
 from django.views.generic import CreateView, ListView, DetailView
 from django.urls import reverse

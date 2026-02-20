@@ -1,3 +1,7 @@
+# File: mini_insta/forms.py
+# Author: Kai Solter (ksolter@bu.edu), 2/13/2026 
+# Description: Forms for mini_insta app 
+
 from django import forms
 from .models import Article, Comment
 

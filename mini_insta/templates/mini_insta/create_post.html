@@ -1,3 +1,6 @@
+<!-- File: mini_insta/templates/mini_insta/create_post.html -->
+<!-- Author: Kai Solter (ksolter@bu.edu), 2/13/2026 -->
+<!--Description: Template for creating a new post in mini_insta app -->
 {% extends "mini_insta/base.html" %} {% block content %}
 <h1>Create a new post</h1>
 <form action="{% url 'create_post' profile.pk %}" method="POST">

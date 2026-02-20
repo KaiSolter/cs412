@@ -1,5 +1,6 @@
-from tokenize import Comment
-
+# File: mini_insta/templates/mini_insta/models.py
+# Author: Kai Solter (ksolter@bu.edu), 2/13/2026 
+# Description: Models for mini_insta app 
 from django.db import models
 
 # Create your models here.
@@ -14,7 +15,7 @@ class Profile(models.Model):
     join_date = models.DateTimeField(auto_created=True)
     
     def get_all_posts(self):
-        ''''返回用户的所有帖子'''
+        ''''get all posts associated with this profile'''
         posts = Post.objects.filter(profile=self)
         return posts
     
@@ -34,7 +35,7 @@ class Post(models.Model):
     timestamp = models.DateTimeField(auto_now_add=True)
     
     def get_all_photos(self):
-        '''返回帖子的所有照片'''
+        '''get all photos associated with this post'''
         photos = Photo.objects.filter(post=self)
         return photos
     

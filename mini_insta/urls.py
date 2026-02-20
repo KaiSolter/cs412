@@ -1,3 +1,7 @@
+# File: mini_insta/urls.py
+# Author: Kai Solter (ksolter@bu.edu), 2/13/2026 
+# Description: urls for mini_insta app 
+
 from django.urls import path
 from .views import *
 urlpatterns = [
