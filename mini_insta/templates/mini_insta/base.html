@@ -16,5 +16,8 @@
 
   <footer>
     <a href="{% url 'profiles' %}"> return to Main Page </a>
+    {% if profile %} |
+    <a href="{% url 'create_post' profile.pk %}"> Create Post </a>
+    {% endif %}
   </footer>
 </html>

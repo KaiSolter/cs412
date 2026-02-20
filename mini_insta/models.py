@@ -31,7 +31,7 @@ class Post(models.Model):
     '''
     profile = models.ForeignKey(Profile, on_delete=models.CASCADE)
     caption = models.TextField(blank=True)
-    timestamp = models.DateTimeField(auto_created=True)
+    timestamp = models.DateTimeField(auto_now_add=True)
     
     def get_all_photos(self):
         '''返回帖子的所有照片'''
@@ -51,7 +51,7 @@ class Photo(models.Model):
     '''
     post = models.ForeignKey(Post, on_delete=models.CASCADE)
     image_url = models.URLField(blank=True)
-    timestamp = models.DateTimeField(auto_created=True)
+    timestamp = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):
         '''
