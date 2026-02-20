@@ -107,19 +107,33 @@ img {
   transition: transform 0.3s ease;
 }
 
+/* Profile list card images */
 body > div > div > a img {
   width: 100%;
   max-width: 500px;
-  height: auto;
-  object-fit: cover;
+  height: 350px;
+  object-fit: contain;
+  border-radius: 8px;
 }
 
 /* Single profile page styling */
 body > div > div > div > img {
   width: 100%;
-  max-width: 600px;
-  height: auto;
+  max-width: 500px;
+  height: 400px;
+  object-fit: contain;
   margin: 1.5rem 0;
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+/* Post detail page images */
+body > div img {
+  width: 100%;
+  max-width: 600px;
+  height: 450px;
+  object-fit: contain;
+  margin: 1rem auto;
   border-radius: 12px;
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
 }
@@ -131,12 +145,16 @@ body > div > div p {
   line-height: 1.8;
   margin: 1rem 0;
   padding: 1rem 0;
+  white-space: pre-wrap;
+  word-wrap: break-word;
 }
 
 body > div > div p:first-of-type {
   font-style: italic;
   border-left: 3px solid #667eea;
   padding-left: 1rem;
+  white-space: pre-wrap;
+  word-wrap: break-word;
 }
 
 /* Join date styling */
@@ -146,6 +164,61 @@ body > div > div > p:last-of-type {
   margin-top: 1.5rem;
   padding-top: 1rem;
   border-top: 1px solid #f0f0f0;
+}
+
+/* Posts container and individual post cards */
+body > div > div > div {
+  margin-bottom: 1.5rem;
+}
+
+/* Posts section heading */
+body > div > div > div > h2 {
+  font-size: 1.75rem;
+  font-weight: 600;
+  color: #262626;
+  margin-bottom: 1.5rem;
+  padding-bottom: 1rem;
+  border-bottom: 2px solid #667eea;
+}
+
+/* Individual post card */
+body > div > div > div > div {
+  background: white;
+  border-radius: 12px;
+  overflow: hidden;
+  margin-bottom: 1.5rem;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  padding: 1rem;
+}
+
+body > div > div > div > div:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.12);
+}
+
+/* Post image styling */
+body > div > div > div > div a {
+  display: block;
+  margin-bottom: 1rem;
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+body > div > div > div > div a img {
+  width: 100%;
+  display: block;
+  border-radius: 8px;
+}
+
+/* Post caption styling */
+body > div > div > div > div p {
+  color: #262626;
+  margin: 0.75rem 0;
+  font-size: 1rem;
+  line-height: 1.6;
+  white-space: pre-wrap;
+  word-wrap: break-word;
 }
 
 /* Horizontal dividers */
@@ -265,4 +338,127 @@ a {
 a:hover {
   color: #764ba2;
   text-decoration: underline;
+}
+
+/* Form styling */
+form {
+  max-width: 600px;
+  margin: 2rem auto;
+  background: white;
+  padding: 2rem;
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+  display: block;
+  width: 100%;
+}
+
+form table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-bottom: 1.5rem;
+}
+
+form table tbody tr {
+  display: table-row;
+}
+
+form table td {
+  padding: 1rem 0.5rem;
+  vertical-align: middle;
+  display: table-cell;
+}
+
+form table td:last-child {
+  width: 100%;
+}
+
+form table th {
+  text-align: left;
+  font-weight: 600;
+  color: #262626;
+  padding: 1rem 0.5rem;
+  display: table-cell;
+}
+
+/* Input fields and textareas */
+input[type="text"],
+input[type="email"],
+input[type="url"],
+input[type="password"],
+textarea {
+  width: 100%;
+  padding: 0.75rem 1rem;
+  border: 1px solid #ddd;
+  border-radius: 6px;
+  font-size: 1rem;
+  font-family: inherit;
+  transition: border-color 0.3s ease, box-shadow 0.3s ease;
+  box-sizing: border-box;
+}
+
+input[type="text"]:focus,
+input[type="email"]:focus,
+input[type="url"]:focus,
+input[type="password"]:focus,
+textarea:focus {
+  outline: none;
+  border-color: #667eea;
+  box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+}
+
+/* Label styling */
+label {
+  display: block;
+  font-weight: 600;
+  margin-bottom: 0.5rem;
+  color: #262626;
+}
+
+/* Button styling */
+input[type="submit"],
+input[type="button"] {
+  padding: 0.75rem 1.5rem;
+  margin-right: 1rem;
+  margin-top: 1rem;
+  border: none;
+  border-radius: 6px;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+/* Submit button */
+input[type="submit"] {
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  color: white;
+  box-shadow: 0 4px 12px rgba(102, 126, 234, 0.3);
+}
+
+input[type="submit"]:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 16px rgba(102, 126, 234, 0.4);
+}
+
+input[type="submit"]:active {
+  transform: translateY(0);
+  box-shadow: 0 2px 8px rgba(102, 126, 234, 0.3);
+}
+
+/* Cancel button */
+input[type="button"] {
+  background: #f0f0f0;
+  color: #262626;
+  border: 1px solid #ddd;
+}
+
+input[type="button"]:hover {
+  background: #e8e8e8;
+  border-color: #ccc;
+  transform: translateY(-2px);
+}
+
+input[type="button"]:active {
+  transform: translateY(0);
+  background: #e0e0e0;
 }
