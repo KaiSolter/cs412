@@ -12,8 +12,17 @@ class CreateArticleForm(forms.ModelForm):
     class Meta:
         '''associate form with model from db'''
         model = Article
-        fields = ['author', 'title', 'text', 'image_url']
-        
+        fields = ['author', 'title', 'text', 'image_file']
+
+class UpdateArticleForm(forms.ModelForm):
+    '''
+    Form for updating an existing article.
+    '''
+    class Meta:
+        '''associate form with model from db'''
+        model = Article
+        fields = ['title', 'text']
+
 class CreateCommentForm(forms.ModelForm):
     '''
     Form for creating a new comment.

@@ -1,7 +1,9 @@
+from xml.etree.ElementTree import Comment
+
 from django.shortcuts import render
-from django.views.generic import ListView, DetailView, CreateView
-from .models import Article
-from . forms import CreateArticleForm, CreateCommentForm
+from django.views.generic import ListView, DetailView, CreateView, UpdateView, DeleteView
+from .models import Article, Comment
+from . forms import CreateArticleForm, CreateCommentForm, UpdateArticleForm
 import random
 from django.urls import reverse
 # Create your views here.
@@ -38,6 +40,18 @@ class CreateArticleView(CreateView):
     '''
     form_class = CreateArticleForm
     template_name = "blog/create_article_form.html"
+    def form_valid(self, form):
+        '''If the form is valid, save the associated model'''
+        print(f'CreateArticleView.form_valid(): {form.cleaned_data}')
+        return super().form_valid(form)
+    
+class UpdateArticleView(UpdateView):
+    '''
+    Display html form to user and process submission updating the existing data object
+    '''
+    model = Article
+    form_class = UpdateArticleForm
+    template_name = "blog/update_article_form.html"
 
 class CreateCommentView(CreateView):
     '''
@@ -66,4 +80,20 @@ class CreateCommentView(CreateView):
         article = Article.objects.get(pk=pk)
         form.instance.article = article
         return super().form_valid(form)
-    
+
+class DeleteCommentView(DeleteView):
+    '''
+    Docstring for DeleteCommentView
+    '''
+    model = Comment 
+    template_name = "blog/delete_comment_form.html"
+    def get_success_url(self):
+        '''After successfully deleting a comment, redirect to the article page
+        '''
+        # find primary key for comment
+        pk = self.kwargs['pk']
+        #find comment object
+        comment = Comment.objects.get(pk=pk)
+        #find article associated with comment
+        article = comment.article
+        return reverse('article', kwargs={'pk': article.pk})

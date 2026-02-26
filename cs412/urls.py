@@ -16,8 +16,10 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import include, path
+from django.conf import settings
+from django.conf.urls.static import static
 
-urlpatterns = [
+urlpatterns = [ 
     path('admin/', admin.site.urls),
     path('hw/', include('hw.urls')),  #video example 
     path('quotes/', include('quotes.urls')),  #assignment one
@@ -25,4 +27,7 @@ urlpatterns = [
     path('restaurant/', include('restaurant.urls')),  #assignment two
     path('blog/', include('blog.urls')),  #example three
     path('mini_insta/', include('mini_insta.urls'))
-]
+] 
+
+urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT) 
+urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

@@ -9,9 +9,11 @@
       <h3>by {{ article.author }}</h3>
       <p>{{ article.text }}</p>
     </div>
+    {% if article.image_file %}
     <a href="{% url 'article' article.pk %}">
-      <img src="{{article.image_url}}" alt="{{a.image_url}}" />
+      <img src="{{article.image_file.url}}" alt="{{a.image_url}}" />
     </a>
+    {% endif %}
   </article>
   <hr />
   {% endfor %}
