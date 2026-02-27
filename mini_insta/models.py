@@ -52,12 +52,21 @@ class Photo(models.Model):
     '''
     post = models.ForeignKey(Post, on_delete=models.CASCADE)
     image_url = models.URLField(blank=True)
+    image_file = models.ImageField(blank=True)
     timestamp = models.DateTimeField(auto_now_add=True)
+    
+    def get_image_url(self):
+        '''get the image url for this photo'''
+        if self.image_file:
+            return self.image_file.url
+        else:
+            return self.image_url
 
     def __str__(self):
         '''
         Docstring for __str__
         :param self: Description
         '''
-        return f'Image: {self.image_url} for post: {self.post.caption}'
+        image = self.image_file.url if self.image_file else self.image_url
+        return f'Image: {image} for post: {self.post.caption}'
     

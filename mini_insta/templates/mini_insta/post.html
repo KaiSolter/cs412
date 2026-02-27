@@ -8,7 +8,7 @@
   <h2>Post by {{ post.profile.username }}</h2>
   <div class="post-images">
     {% for photo in post.get_all_photos %}
-    <img src="{{photo.image_url}}" alt="" />
+    <img src="{{photo.get_image_url}}" alt="" />
     {% empty %}
     <img
       src="https://upload.wikimedia.org/wikipedia/commons/a/a3/Image-not-found.png?20210521171500"

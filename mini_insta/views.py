@@ -44,8 +44,7 @@ class CreatePostView(CreateView):
     def get_success_url(self):
         '''After successfully creating a post, redirect to the post page
         '''
-        pk = self.kwargs['pk']
-        return reverse('post', kwargs={'pk': pk})
+        return reverse('post', kwargs={'pk': self.object.pk})
 
     def get_context_data(self, **kwargs):
         ''' Add the profile to the context so we can associate the new post with the correct profile'''
@@ -65,11 +64,16 @@ class CreatePostView(CreateView):
         response = super().form_valid(form)
         
         # Now create the Photo object with the image_url from the form
-        image_url = self.request.POST.get('image_url')
-        if image_url:
+        # image_url = self.request.POST.get('image_url')
+        # if image_url:
+        #     Photo.objects.create(
+        #         post=self.object,
+        #         image_url=image_url
+        #     )
+        files = self.request.FILES.getlist('files')
+        for file in files:
             Photo.objects.create(
                 post=self.object,
-                image_url=image_url
+                image_file=file
             )
-        
         return response

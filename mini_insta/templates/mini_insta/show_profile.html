@@ -21,7 +21,7 @@
       {% with first_photo=post.get_all_photos.first %}
       {% if first_photo %}
       <a href="{% url 'post' post.pk %}">
-        <img src="{{first_photo.image_url}}" alt="" />
+        <img src="{{first_photo.get_image_url}}" alt="" />
       </a>
       {% else %}
       <a href="{% url 'post' post.pk %}">

@@ -8,9 +8,7 @@ from .models import *
 class CreatePostForm(forms.ModelForm):
     '''
     Form for creating a new post.
-    '''
-    image_url = forms.URLField(label='Image URL', required=True)
-    
+    '''    
     class Meta:
         '''associate form with model'''
         model = Post
