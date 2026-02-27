@@ -14,6 +14,15 @@ class CreatePostForm(forms.ModelForm):
         model = Post
         fields = ['caption']
         
+class UpdatePostForm(forms.ModelForm):
+    '''
+    Form for updating a post.
+    '''    
+    class Meta:
+        '''associate form with model'''
+        model = Post
+        fields = ['caption']
+        
 class UpdateProfileForm(forms.ModelForm):
     '''
     Form for updating a profile.

@@ -19,6 +19,8 @@
   <div class="post-content">
     <p>{{post.caption}}</p>
     <p><small>{{post.timestamp}}</small></p>
+    <a href="{% url 'delete_post' post.pk %}">Delete Post</a>
+    <a href="{% url 'update_post' post.pk %}">Edit Post</a>
   </div>
 </div>
 {% endblock %}

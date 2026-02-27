@@ -2,7 +2,7 @@
 # Author: Kai Solter (ksolter@bu.edu), 2/13/2026 
 # Description: Views for mini_insta app 
 from django.shortcuts import render
-from django.views.generic import CreateView, ListView, DetailView, UpdateView
+from django.views.generic import CreateView, ListView, DetailView, UpdateView, DeleteView
 from django.urls import reverse
 
 from mini_insta.forms import CreatePostForm, UpdateProfileForm
@@ -77,6 +77,47 @@ class CreatePostView(CreateView):
                 image_file=file
             )
         return response
+    
+class DeletePostView(DeleteView):
+    '''
+    Display html form to user and process submission deleting the post
+    '''
+    model = Post
+    template_name = "mini_insta/delete_post_form.html"
+    
+    def get_context_data(self, **kwargs):
+        ''' Add the profile to the context so we can redirect to the correct profile page after deleting'''
+        context = super().get_context_data(**kwargs)
+        post = self.object
+        profile = post.profile
+        context['profile'] = profile
+        return context
+    
+    def get_success_url(self):
+        '''After successfully deleting a post, redirect to the profile page'''
+        profile = self.object.profile
+        return reverse('profile', kwargs={'pk': profile.pk}) 
+    
+class UpdatePostView(UpdateView):
+    '''
+    Display html form to user and process submission updating the post
+    '''
+    model = Post
+    form_class = CreatePostForm
+    template_name = "mini_insta/update_post_form.html"
+    
+    def get_context_data(self, **kwargs):
+        ''' Add the profile to the context so we can redirect to the correct profile page after updating'''
+        context = super().get_context_data(**kwargs)
+        post = self.object
+        profile = post.profile
+        context['profile'] = profile
+        return context
+
+    def get_success_url(self):
+        '''After successfully updating a post, redirect to the profile page'''
+        profile = self.object.profile
+        return reverse('profile', kwargs={'pk': profile.pk}) 
     
 class UpdateProfileView(UpdateView):
     '''

@@ -1,0 +1,16 @@
+<!-- File: mini_insta/templates/mini_insta/delete_post_form.html -->
+<!-- Author: Kai Solter (ksolter@bu.edu), 2/26/2026 -->
+<!--Description: Template for deleting a post in mini_insta app -->
+{% extends "mini_insta/base.html" %} {% block content %}
+<h1>Delete Post</h1>
+<form action="{% url 'delete_post' post.pk %}" method="POST">
+  {% csrf_token %}
+  <input type="submit" name="submit" value="Delete" />
+  <input
+    type="button"
+    name="cancel"
+    value="Cancel"
+    onclick="window.location.href='{% url 'profile' profile.pk %}'"
+  />
+</form>
+{% endblock %}
