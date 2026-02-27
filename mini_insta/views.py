@@ -2,10 +2,10 @@
 # Author: Kai Solter (ksolter@bu.edu), 2/13/2026 
 # Description: Views for mini_insta app 
 from django.shortcuts import render
-from django.views.generic import CreateView, ListView, DetailView
+from django.views.generic import CreateView, ListView, DetailView, UpdateView
 from django.urls import reverse
 
-from mini_insta.forms import CreatePostForm
+from mini_insta.forms import CreatePostForm, UpdateProfileForm
 from .models import *
 # Create your views here.
 class ProfileListView(ListView):
@@ -77,3 +77,12 @@ class CreatePostView(CreateView):
                 image_file=file
             )
         return response
+    
+class UpdateProfileView(UpdateView):
+    '''
+    Display html form to user and process submission storing the updated profile data
+    '''
+    model = Profile
+    form_class = UpdateProfileForm
+    template_name = "mini_insta/update_profile_form.html"
+    

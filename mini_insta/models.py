@@ -19,6 +19,10 @@ class Profile(models.Model):
         posts = Post.objects.filter(profile=self)
         return posts
     
+    def get_absolute_url (self):
+        '''get the url for this profile'''
+        return f'/mini_insta/profile/{self.pk}'
+    
     def __str__(self):
         '''
         Docstring for __str__

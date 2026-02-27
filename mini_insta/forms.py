@@ -13,3 +13,13 @@ class CreatePostForm(forms.ModelForm):
         '''associate form with model'''
         model = Post
         fields = ['caption']
+        
+class UpdateProfileForm(forms.ModelForm):
+    '''
+    Form for updating a profile.
+    '''    
+    class Meta:
+        '''associate form with model'''
+        model = Profile
+        # Don't allow user to update username or join date
+        fields = ['display_name', 'profile_image_url', 'bio_text']
