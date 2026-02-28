@@ -11,6 +11,12 @@
     </div>
     <img src="{{profile.profile_image_url}}" alt="" />
     <p>{{profile.bio_text}}</p>
+    <a href="{% url 'show_followers' profile.pk %}">
+      <p>Followers: {{ profile.get_num_followers }}</p>
+    </a>
+    <a href="{% url 'show_following' profile.pk %}">
+      <p>Following: {{ profile.get_num_following }}</p>
+    </a>
     <a href="{% url 'update_profile' profile.pk %}">Edit Profile</a>
   </div>
   <p>{{profile.join_date}}</p>

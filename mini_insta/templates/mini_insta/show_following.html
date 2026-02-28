@@ -1,0 +1,16 @@
+<!-- File: mini_insta/templates/mini_insta/show_following.html -->
+<!-- Author: Kai Solter (ksolter@bu.edu), 2/13/2026 -->
+<!--Description: Display list of profiles that a profile is following for mini_insta app -->
+
+{% extends 'mini_insta/base.html' %} {% block content%}
+<div class="following-container">
+  <h2>Profiles followed by {{ profile.username }}</h2>
+  <ul>
+    {% for profile_following in profile.get_following %}
+    <li>{{ profile_following.username }}</li>
+    {% empty %}
+    <li>No profiles followed yet.</li>
+    {% endfor %}
+  </ul>
+</div>
+{% endblock %}

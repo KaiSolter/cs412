@@ -30,6 +30,24 @@ class Profile(models.Model):
         '''
         return f' user: {self.username}, with display name {self.display_name}'
     
+    def get_followers(self):
+        '''get all followers of this profile'''
+        followers = Follow.objects.filter(profile=self)
+        return [follow.follower_profile for follow in followers]
+    
+    def get_following(self):
+        '''get all profiles this profile is following'''
+        following = Follow.objects.filter(follower_profile=self)
+        return [follow.profile for follow in following]
+    
+    def get_num_followers(self):
+        '''get the number of followers for this profile'''
+        return len(self.get_followers())
+    
+    def get_num_following(self):
+        '''get the number of profiles this profile is following'''
+        return len(self.get_following())
+    
 class Post(models.Model):
     '''
     Post Model
@@ -42,6 +60,16 @@ class Post(models.Model):
         '''get all photos associated with this post'''
         photos = Photo.objects.filter(post=self)
         return photos
+    
+    def get_all_comments(self):
+        '''get all comments associated with this post'''
+        comments = Comment.objects.filter(post=self)
+        return comments
+    
+    def get_likes(self):
+        '''get all likes associated with this post'''
+        likes = Like.objects.filter(post=self)
+        return likes
     
     def __str__(self):
         '''
@@ -74,3 +102,39 @@ class Photo(models.Model):
         image = self.image_file.url if self.image_file else self.image_url
         return f'Image: {image} for post: {self.post.caption}'
     
+class Follow(models.Model):
+    '''
+    Follow Model to store relationships between profiles
+    '''
+    profile = models.ForeignKey(Profile, related_name='profile', on_delete=models.CASCADE)
+    follower_profile = models.ForeignKey(Profile, related_name='follower_profile', on_delete=models.CASCADE)
+    
+    def __str__(self):
+        ''' Docstring for __str__'''
+        return f'{self.follower_profile.display_name} follows {self.profile.display_name}'
+    
+
+class Comment(models.Model):
+    '''
+    Comment Model to store comments on posts
+    '''
+    post = models.ForeignKey(Post, on_delete=models.CASCADE)
+    profile = models.ForeignKey(Profile, on_delete=models.CASCADE)
+    timestamp = models.DateTimeField(auto_now_add=True)
+    text = models.TextField(blank=True)
+    
+    def __str__(self):
+        ''' Docstring for __str__'''
+        return f'{self.text}'
+    
+class Like(models.Model):
+    '''
+    Like Model to store likes on posts
+    '''
+    post = models.ForeignKey(Post, on_delete=models.CASCADE)
+    profile = models.ForeignKey(Profile, on_delete=models.CASCADE)
+    timestamp = models.DateTimeField(auto_now_add=True)
+    
+    def __str__(self):
+        ''' Docstring for __str__'''
+        return f'{self.profile.display_name} likes {self.post.caption}'

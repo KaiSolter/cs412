@@ -1,0 +1,16 @@
+<!-- File: mini_insta/templates/mini_insta/show_followers.html -->
+<!-- Author: Kai Solter (ksolter@bu.edu), 2/13/2026 -->
+<!--Description: Display list of followers for mini_insta app -->
+
+{% extends 'mini_insta/base.html' %} {% block content%}
+<div class="followers-container">
+  <h2>Followers of {{ profile.username }}</h2>
+  <ul>
+    {% for follower in profile.get_followers %}
+    <li>{{ follower.username }}</li>
+    {% empty %}
+    <li>No followers yet.</li>
+    {% endfor %}
+  </ul>
+</div>
+{% endblock %}

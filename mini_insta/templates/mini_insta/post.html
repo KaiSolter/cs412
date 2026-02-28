@@ -17,10 +17,25 @@
     {% endfor %}
   </div>
   <div class="post-content">
+    <p><strong>Likes: {{ post.get_likes|length }}</strong></p>
     <p>{{post.caption}}</p>
     <p><small>{{post.timestamp}}</small></p>
     <a href="{% url 'delete_post' post.pk %}">Delete Post</a>
     <a href="{% url 'update_post' post.pk %}">Edit Post</a>
+  </div>
+  <div class="comments-section">
+    <h3>Comments</h3>
+    {% for comment in post.get_all_comments %}
+    <div class="comment">
+      <p>
+        <strong>{{ comment.profile.username }}</strong>
+        <small>{{ comment.timestamp }}</small>
+      </p>
+      <p>{{ comment.text }}</p>
+    </div>
+    {% empty %}
+    <p>No comments yet.</p>
+    {% endfor %}
   </div>
 </div>
 {% endblock %}
