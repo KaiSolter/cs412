@@ -1,0 +1,47 @@
+<!-- File: mini_insta/templates/mini_insta/show_feed.html -->
+<!-- Author: Kai Solter (ksolter@bu.edu), 2/28/2026 -->
+<!--Description: Display post feed for a profile -->
+
+{% extends 'mini_insta/base.html' %} {% block content%}
+<div class="feed-container">
+  <h2>{{ profile.username }}'s Feed</h2>
+  {% for post in feed_posts %}
+  <div class="feed-post">
+    <h3>Post by {{ post.profile.username }}</h3>
+    <div class="post-images">
+      {% with first_photo=post.get_all_photos.first %} {% if first_photo %}
+      <img src="{{first_photo.get_image_url}}" alt="" />
+      {% else %}
+      <img
+        src="https://upload.wikimedia.org/wikipedia/commons/a/a3/Image-not-found.png?20210521171500"
+        alt=""
+      />
+      {% endif %} {% endwith %}
+    </div>
+    <div class="post-content">
+      <p><strong>Likes: {{ post.get_likes|length }}</strong></p>
+      <p>{{post.caption}}</p>
+      <p><small>{{post.timestamp}}</small></p>
+      <a href="{% url 'post' post.pk %}">View Post</a>
+    </div>
+    <div class="comments-section">
+      <h4>Comments</h4>
+      {% for comment in post.get_all_comments %}
+      <div class="comment">
+        <p>
+          <strong>{{ comment.profile.username }}</strong>
+          <small>{{ comment.timestamp }}</small>
+        </p>
+        <p>{{ comment.text }}</p>
+      </div>
+      {% empty %}
+      <p>No comments yet.</p>
+      {% endfor %}
+    </div>
+  </div>
+  {% empty %}
+  <p>No posts in your feed yet. Follow some profiles to see their posts!</p>
+  {% endfor %}
+  <a href="{% url 'profile' profile.pk %}">Back to Profile</a>
+  {% endblock %}
+</div>

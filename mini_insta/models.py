@@ -48,6 +48,15 @@ class Profile(models.Model):
         '''get the number of profiles this profile is following'''
         return len(self.get_following())
     
+    def get_post_feed(self):
+        '''get the post feed for this profile (posts from profiles this profile is following)'''
+        following_profiles = self.get_following()
+        feed_posts = []
+        for profile in following_profiles:
+            feed_posts.extend(profile.get_all_posts())
+        feed_posts.sort(key=lambda post: post.timestamp, reverse=True)
+        return feed_posts
+    
 class Post(models.Model):
     '''
     Post Model
