@@ -1,0 +1,60 @@
+<!-- File: mini_insta/templates/mini_insta/search_results.html -->
+<!-- Author: Kai Solter (ksolter@bu.edu), 3/1/2026 -->
+<!--Description: Display search results for mini_insta app -->
+{% extends 'mini_insta/base.html' %} {% block content %}
+<div class="search-results-container">
+  <h1>Search Results for "{{ query }}"</h1>
+
+  <a href="{% url 'search' pk=profile.pk %}" class="back-link"
+    >← Back to Search</a
+  >
+
+  <section class="profiles-section">
+    <h2>Profiles</h2>
+    {% if profiles %}
+    <ul class="profiles-list">
+      {% for profile_result in profiles %}
+      <li class="profile-item">
+        <h3>
+          <a href="{% url 'profile' pk=profile_result.pk %}">
+            {{ profile_result.display_name }}
+          </a>
+        </h3>
+        <p class="username">@{{ profile_result.username }}</p>
+      </li>
+      {% endfor %}
+    </ul>
+    {% else %}
+    <p class="no-results">No profiles found.</p>
+    {% endif %}
+  </section>
+
+  <section class="posts-section">
+    <h2>Posts</h2>
+    {% if posts %}
+    <ul class="posts-list">
+      {% for post in posts %}
+      <li class="post-item">
+        {% if post.photo_set.first %} {% if post.photo_set.first.image_file %}
+        <img src="{{ post.photo_set.first.image_file.url }}" alt="" />
+        {% elif post.photo_set.first.image_url %}
+        <img src="{{ post.photo_set.first.image_url }}" alt="" />
+        {% endif %} {% endif %}
+        <h3>
+          <a href="{% url 'profile' pk=post.profile.pk %}">
+            {{ post.profile.display_name }}
+          </a>
+        </h3>
+        <p class="caption">{{ post.caption }}</p>
+        <a href="{% url 'post' pk=post.pk %}" class="view-post-btn"
+          >View Post</a
+        >
+      </li>
+      {% endfor %}
+    </ul>
+    {% else %}
+    <p class="no-results">No posts found.</p>
+    {% endif %}
+  </section>
+</div>
+{% endblock %}

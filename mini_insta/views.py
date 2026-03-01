@@ -4,6 +4,7 @@
 from django.shortcuts import render
 from django.views.generic import CreateView, ListView, DetailView, UpdateView, DeleteView
 from django.urls import reverse
+from django.db.models import Q
 
 from mini_insta.forms import CreatePostForm, UpdateProfileForm
 from .models import *
@@ -160,3 +161,40 @@ class PostFeedListView(ListView):
         context['feed_posts'] = profile.get_post_feed()
         context['profile'] = profile
         return context
+    
+class SearchView(ListView):
+    '''Display search results for profiles and posts'''
+    model = Post
+    template_name = 'mini_insta/search_results.html'
+    context_object_name = 'posts'
+    
+    def dispatch(self, request, *args, **kwargs):
+        '''Check if query parameter exists. If not, show search form.'''
+        query = request.GET.get('q')
+        if not query:
+            profile = Profile.objects.get(pk=self.kwargs['pk'])
+            context = {'profile': profile}
+            return render(request, 'mini_insta/search.html', context)
+        return super().dispatch(request, *args, **kwargs)
+    
+    def get_queryset(self):
+        '''Get all posts that match the query'''
+        query = self.request.GET.get('q')
+        return Post.objects.filter(caption__icontains=query)
+    
+    def get_context_data(self, **kwargs):
+        '''Add profile, query, and matching profiles to context'''
+        context = super().get_context_data(**kwargs)
+        query = self.request.GET.get('q')
+        profile = Profile.objects.get(pk=self.kwargs['pk'])
+        
+        # Get profiles that match the query (searching both username and display name)
+        profiles = Profile.objects.filter(
+            Q(username__icontains=query) | Q(display_name__icontains=query)
+        )
+        
+        context['profile'] = profile
+        context['query'] = query
+        context['profiles'] = profiles
+        return context
+    

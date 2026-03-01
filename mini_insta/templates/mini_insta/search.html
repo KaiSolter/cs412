@@ -1,0 +1,25 @@
+<!-- File: mini_insta/templates/mini_insta/search.html -->
+<!-- Author: Kai Solter (ksolter@bu.edu), 3/1/2026 -->
+<!--Description: Display search form for mini_insta app -->
+{% extends 'mini_insta/base.html' %} {% block content %}
+<div class="search-container">
+  <h1>Search Profiles and Posts</h1>
+
+  <form method="get" class="search-form">
+    <input
+      type="text"
+      name="q"
+      placeholder="Search profiles by username or display name, or posts by caption"
+      class="search-input"
+      required
+    />
+    <button type="submit" class="search-button">Search</button>
+    <input
+      type="button"
+      name="cancel"
+      value="Cancel"
+      onclick="window.location.href='{% url 'profile' profile.pk %}'"
+    />
+  </form>
+</div>
+{% endblock %}
