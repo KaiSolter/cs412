@@ -6,6 +6,9 @@ from .models import Article, Comment
 from . forms import CreateArticleForm, CreateCommentForm, UpdateArticleForm
 import random
 from django.urls import reverse
+from django.contrib.auth.mixins import LoginRequiredMixin
+from django.contrib.auth.forms import UserCreationForm
+from django.contrib.auth.models import User
 # Create your views here.
 
 class showAll(ListView):
@@ -13,6 +16,13 @@ class showAll(ListView):
     model = Article
     template_name = 'blog/showAll.html'
     context_object_name = 'articles'
+    
+    def dispatch(self, request, *args, **kwargs):
+        if request.user.is_authenticated:
+            print(f'ShowAllView.dispatch(): {request.user} ')
+        else:
+            print('ShowAllView.dispatch(): Not Logged In')
+        return super().dispatch(request, *args, **kwargs)
     
 class ArticleView(DetailView):
     '''
@@ -34,15 +44,23 @@ class RandomArticleView(DetailView):
         article = random.choice(all_articles)
         return article
     
-class CreateArticleView(CreateView):
+class CreateArticleView(LoginRequiredMixin, CreateView):
     '''
     Display html form to user and process submission storing the new data object
     '''
     form_class = CreateArticleForm
     template_name = "blog/create_article_form.html"
+    
+    def get_login_url(self):
+        return reverse('login')
+    
     def form_valid(self, form):
         '''If the form is valid, save the associated model'''
         print(f'CreateArticleView.form_valid(): {form.cleaned_data}')
+        
+        user = self.request.user
+        form.instance.user = user
+        
         return super().form_valid(form)
     
 class UpdateArticleView(UpdateView):
@@ -97,3 +115,14 @@ class DeleteCommentView(DeleteView):
         #find article associated with comment
         article = comment.article
         return reverse('article', kwargs={'pk': article.pk})
+    
+class UserRegisterView(CreateView):
+    '''
+    Docstring for UserRegisterView
+    '''
+    form_class = UserCreationForm
+    template_name = "blog/register.html"
+    model = User
+    
+    def get_success_url(self):
+        return reverse('login')

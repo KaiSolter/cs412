@@ -3,7 +3,9 @@
 
 <main class="grid-container">
   <article>
+    {% if article.image_file %}
     <img src="{{article.image_file.url}}" alt="" />
+    {% endif %}
     <div>
       <h2>{{ article.title }}</h2>
       <h3>by {{ article.author }} at {{ article.published }}</h3>
