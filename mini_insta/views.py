@@ -5,6 +5,9 @@ from django.shortcuts import render
 from django.views.generic import CreateView, ListView, DetailView, UpdateView, DeleteView
 from django.urls import reverse
 from django.db.models import Q
+from django.contrib.auth.mixins import LoginRequiredMixin
+from django.core.exceptions import PermissionDenied
+
 
 from mini_insta.forms import CreatePostForm, UpdateProfileForm
 from .models import *
@@ -25,6 +28,18 @@ class ProfileDetailView(DetailView):
     model = Profile
     template_name = "mini_insta/show_profile.html"
     context_object_name = 'profile'
+
+class ProfileSelfDetailView(LoginRequiredMixin, DetailView):
+    '''
+    Display the logged-in user's own profile
+    '''
+    model = Profile
+    template_name = "mini_insta/show_profile.html"
+    context_object_name = 'profile'
+    
+    def get_object(self):
+        '''Get the profile object for the logged-in user'''
+        return Profile.objects.get(user=self.request.user)
     
 class PostDetailView(DetailView):
     '''
@@ -34,7 +49,7 @@ class PostDetailView(DetailView):
     template_name = "mini_insta/post.html"
     context_object_name = 'post'
     
-class CreatePostView(CreateView):
+class CreatePostView(LoginRequiredMixin, CreateView):
     '''
     Display html form to user and process submission storing the new data object
     '''
@@ -50,16 +65,17 @@ class CreatePostView(CreateView):
     def get_context_data(self, **kwargs):
         ''' Add the profile to the context so we can associate the new post with the correct profile'''
         context = super().get_context_data(**kwargs)
-        pk = self.kwargs['pk']
-        profile = Profile.objects.get(pk=pk)
+        profile = Profile.objects.get(user=self.request.user)
         context['profile'] = profile
         return context
 
     def form_valid(self, form):
         '''Associate the new post with the correct profile before saving'''
-        pk = self.kwargs['pk']
-        profile = Profile.objects.get(pk=pk)
+        profile = Profile.objects.get(user=self.request.user)
         form.instance.profile = profile
+        
+        user = self.request.user
+        form.instance.user = user
         
         # Save the post first
         response = super().form_valid(form)
@@ -79,7 +95,7 @@ class CreatePostView(CreateView):
             )
         return response
     
-class DeletePostView(DeleteView):
+class DeletePostView(LoginRequiredMixin, DeleteView):
     '''
     Display html form to user and process submission deleting the post
     '''
@@ -99,7 +115,16 @@ class DeletePostView(DeleteView):
         profile = self.object.profile
         return reverse('profile', kwargs={'pk': profile.pk}) 
     
-class UpdatePostView(UpdateView):
+    def form_valid(self, form):
+        '''Associate the post with the correct profile before deleting'''
+     
+        user = self.request.user
+        if self.object.profile.user != user:
+            raise PermissionDenied("You can only delete your own post.")
+        form.instance.user = user
+        return super().form_valid(form)
+    
+class UpdatePostView(LoginRequiredMixin, UpdateView):
     '''
     Display html form to user and process submission updating the post
     '''
@@ -120,13 +145,33 @@ class UpdatePostView(UpdateView):
         profile = self.object.profile
         return reverse('profile', kwargs={'pk': profile.pk}) 
     
-class UpdateProfileView(UpdateView):
+    def form_valid(self, form):
+        '''Associate the post with the correct profile before updating'''
+        user = self.request.user
+        if self.object.profile.user != user:
+            raise PermissionDenied("You can only edit your own post.")
+        form.instance.user = user
+        return super().form_valid(form)
+    
+class UpdateProfileView(LoginRequiredMixin, UpdateView):
     '''
     Display html form to user and process submission storing the updated profile data
     '''
     model = Profile
     form_class = UpdateProfileForm
     template_name = "mini_insta/update_profile_form.html"
+    
+    def get_object(self):
+        '''Get the profile object for the logged-in user'''
+        return Profile.objects.get(user=self.request.user)
+    
+    def form_valid(self, form):
+        '''Associate the profile with the correct user before updating'''
+        user = self.request.user
+        if self.object.user != user:
+            raise PermissionDenied("You can only edit your own profile.")
+        form.instance.user = user
+        return super().form_valid(form)
     
 
 class ShowFollowersDetailView(DetailView):
@@ -145,7 +190,7 @@ class ShowFollowingDetailView(DetailView):
     template_name = "mini_insta/show_following.html"
     context_object_name = 'profile'
     
-class PostFeedListView(ListView):
+class PostFeedListView(LoginRequiredMixin, ListView):
     '''
     Display a post feed for a profile (posts from profiles this profile is following)
     '''
@@ -156,23 +201,34 @@ class PostFeedListView(ListView):
     def get_context_data(self, **kwargs):
         ''' Add the relevant info to the context'''
         context = super().get_context_data(**kwargs)
-        pk = self.kwargs['pk']
-        profile = Profile.objects.get(pk=pk)
+        profile = Profile.objects.get(user=self.request.user)
         context['feed_posts'] = profile.get_post_feed()
         context['profile'] = profile
         return context
     
-class SearchView(ListView):
+    def form_valid(self, form):
+        '''user must be logged in to view feed'''
+        user = self.request.user
+        form.instance.user = user
+        return super().form_valid(form)
+    
+class SearchView(LoginRequiredMixin, ListView):
     '''Display search results for profiles and posts'''
     model = Post
     template_name = 'mini_insta/search_results.html'
     context_object_name = 'posts'
     
+    def form_valid(self, form):
+        '''user must be logged in to view feed'''
+        user = self.request.user
+        form.instance.user = user
+        return super().form_valid(form)
+    
     def dispatch(self, request, *args, **kwargs):
         '''Check if query parameter exists. If not, show search form.'''
         query = request.GET.get('q')
         if not query:
-            profile = Profile.objects.get(pk=self.kwargs['pk'])
+            profile = Profile.objects.get(user=self.request.user)
             context = {'profile': profile}
             return render(request, 'mini_insta/search.html', context)
         return super().dispatch(request, *args, **kwargs)
@@ -186,7 +242,7 @@ class SearchView(ListView):
         '''Add profile, query, and matching profiles to context'''
         context = super().get_context_data(**kwargs)
         query = self.request.GET.get('q')
-        profile = Profile.objects.get(pk=self.kwargs['pk'])
+        profile = Profile.objects.get(user=self.request.user)
         
         # Get profiles that match the query (searching both username and display name)
         profiles = Profile.objects.filter(

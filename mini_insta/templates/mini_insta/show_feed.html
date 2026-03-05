@@ -42,6 +42,6 @@
   {% empty %}
   <p>No posts in your feed yet. Follow some profiles to see their posts!</p>
   {% endfor %}
-  <a href="{% url 'profile' profile.pk %}">Back to Profile</a>
+  <a href="{% url 'profile_self' %}">Back to Profile</a>
   {% endblock %}
 </div>

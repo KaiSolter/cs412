@@ -13,10 +13,12 @@
     <p>{{profile.bio_text}}</p>
     <p>Followers: {{ profile.get_followers|length }}</p>
     <p>Following: {{ profile.get_following|length }}</p>
+    {% if request.user.is_authenticated and request.user == profile.user %}
     <div>
-      <a href="{% url 'show_feed' profile.pk %}">View Feed</a>
-      <a href="{% url 'update_profile' profile.pk %}">Edit Profile</a>
+      <a href="{% url 'show_feed' %}">View Feed</a>
+      <a href="{% url 'update_profile' %}">Edit Profile</a>
     </div>
+    {% endif %}
   </div>
   <p>{{profile.join_date}}</p>
   <hr />

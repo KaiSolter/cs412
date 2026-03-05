@@ -4,7 +4,7 @@
 {% extends "mini_insta/base.html" %} {% block content %}
 <h1>Update Profile</h1>
 <form
-  action="{% url 'update_profile' profile.pk %}"
+  action="{% url 'update_profile' %}"
   method="POST"
   enctype="multipart/form-data"
 >
@@ -17,7 +17,7 @@
     type="button"
     name="cancel"
     value="Cancel"
-    onclick="window.location.href='{% url 'profile' profile.pk %}'"
+    onclick="window.location.href='{% url 'profile_self' %}'"
   />
 </form>
 {% endblock %}
