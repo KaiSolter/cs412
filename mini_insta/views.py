@@ -7,9 +7,11 @@ from django.urls import reverse
 from django.db.models import Q
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.core.exceptions import PermissionDenied
+from django.contrib.auth.forms import UserCreationForm
+from django.contrib.auth import login
+from django.utils import timezone
 
-
-from mini_insta.forms import CreatePostForm, UpdateProfileForm
+from mini_insta.forms import CreatePostForm, CreateProfileForm, UpdateProfileForm
 from .models import *
 # Create your views here.
 class ProfileListView(ListView):
@@ -254,3 +256,35 @@ class SearchView(LoginRequiredMixin, ListView):
         context['profiles'] = profiles
         return context
     
+class CreateProfileView(CreateView):
+    ''''Display html form to user and process submission storing the new profile data
+    '''
+    model = Profile
+    form_class = CreateProfileForm
+    template_name = "mini_insta/create_profile.html"
+    
+    def get_context_data(self, **kwargs):
+        ''' Add the profile to the context so we can associate the new profile with the correct user'''
+        context = super().get_context_data(**kwargs)
+        if 'user_creation_form' not in context:
+            if self.request.method == 'POST':
+                context['user_creation_form'] = UserCreationForm(self.request.POST)
+            else:
+                context['user_creation_form'] = UserCreationForm()
+        return context
+    
+    def get_success_url(self):
+        '''After successfully creating a profile, redirect to the profile page'''
+        return reverse('profile', kwargs={'pk': self.object.pk})
+    
+    def form_valid(self, form):
+        '''Associate the new profile with the correct user before saving'''
+        UCF = UserCreationForm(self.request.POST)
+        if UCF.is_valid():
+            user = UCF.save()
+            login(self.request, user, backend='django.contrib.auth.backends.ModelBackend')
+            form.instance.user = user
+            form.instance.join_date = timezone.now()
+            return super().form_valid(form)
+        else:
+            return self.render_to_response(self.get_context_data(form=form, user_creation_form=UCF))

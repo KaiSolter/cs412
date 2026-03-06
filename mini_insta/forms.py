@@ -32,3 +32,12 @@ class UpdateProfileForm(forms.ModelForm):
         model = Profile
         # Don't allow user to update username or join date
         fields = ['display_name', 'profile_image_url', 'bio_text']
+        
+class CreateProfileForm(forms.ModelForm):
+    '''
+    Form for creating a new profile.
+    '''    
+    class Meta:
+        '''associate form with model'''
+        model = Profile
+        fields = ['username', 'display_name', 'profile_image_url', 'bio_text']

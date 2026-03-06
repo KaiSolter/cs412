@@ -19,7 +19,7 @@
               {% csrf_token %}
               <button type="submit">Logout</button>
       </form>
-      {% else %} Not logged in | <a href="{% url 'login' %}">Login</a> {% endif %}
+      {% else %} Not logged in | <a href="{% url 'login' %}">Login |  </a> <a href="{% url 'create_profile' %}">Create Profile</a> {% endif %}
     </p>
     {% block content %} {% endblock %}
   </body>
