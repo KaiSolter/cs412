@@ -1,7 +1,8 @@
 # File: mini_insta/views.py
 # Author: Kai Solter (ksolter@bu.edu), 2/13/2026 
 # Description: Views for mini_insta app 
-from django.shortcuts import render
+from django.shortcuts import render, redirect
+from django.views import View
 from django.views.generic import CreateView, ListView, DetailView, UpdateView, DeleteView
 from django.urls import reverse
 from django.db.models import Q
@@ -31,6 +32,24 @@ class ProfileDetailView(DetailView):
     template_name = "mini_insta/show_profile.html"
     context_object_name = 'profile'
 
+    def get_context_data(self, **kwargs):
+        '''Add follow state for the logged-in user when viewing another profile.'''
+        context = super().get_context_data(**kwargs)
+        is_following = False
+
+        # Check if this is a different profile and if the logged in user is already a follower or not
+        if self.request.user.is_authenticated:
+            my_profile = Profile.objects.get(user=self.request.user)
+            other_profile = self.object
+            if my_profile != other_profile:
+                is_following = Follow.objects.filter(
+                    follower_profile=my_profile,
+                    profile=other_profile,
+                ).exists()
+
+        context['is_following'] = is_following
+        return context
+
 class ProfileSelfDetailView(LoginRequiredMixin, DetailView):
     '''
     Display the logged-in user's own profile
@@ -42,6 +61,45 @@ class ProfileSelfDetailView(LoginRequiredMixin, DetailView):
     def get_object(self):
         '''Get the profile object for the logged-in user'''
         return Profile.objects.get(user=self.request.user)
+
+
+class FollowView(LoginRequiredMixin, View):
+    '''Create a follow relationship from the logged-in user to the target profile.'''
+
+    def post(self, request, *args, **kwargs):
+        target_profile = Profile.objects.get(pk=self.kwargs['pk'])
+        my_profile = Profile.objects.get(user=request.user)
+
+        if target_profile == my_profile:
+            return redirect('profile', pk=target_profile.pk)
+
+        existing = Follow.objects.filter(
+            follower_profile=my_profile,
+            profile=target_profile,
+        )
+
+        if not existing.exists():
+            Follow.objects.create(
+                follower_profile=my_profile,
+                profile=target_profile,
+            )
+
+        return redirect('profile', pk=target_profile.pk)
+
+
+class DeleteFollowView(LoginRequiredMixin, View):
+    '''Delete the follow relationship from the logged-in user to the target profile (Allows unfollow)'''
+
+    def post(self, request, *args, **kwargs):
+        target_profile = Profile.objects.get(pk=self.kwargs['pk'])
+        my_profile = Profile.objects.get(user=request.user)
+
+        Follow.objects.filter(
+            follower_profile=my_profile,
+            profile=target_profile,
+        ).delete()
+
+        return redirect('profile', pk=target_profile.pk)
     
 class PostDetailView(DetailView):
     '''
@@ -50,6 +108,51 @@ class PostDetailView(DetailView):
     model = Post
     template_name = "mini_insta/post.html"
     context_object_name = 'post'
+
+    def get_context_data(self, **kwargs):
+        '''Add like state for the logged-in user when viewing a post (So we can handle likes)'''
+        context = super().get_context_data(**kwargs)
+        is_liked = False
+
+        if self.request.user.is_authenticated:
+            my_profile = Profile.objects.get(user=self.request.user)
+            post = self.object
+            if my_profile != post.profile:
+                is_liked = Like.objects.filter(
+                    profile=my_profile,
+                    post=post,
+                ).exists()
+
+        context['is_liked'] = is_liked
+        return context
+
+
+class LikePostView(LoginRequiredMixin, View):
+    '''Create a like from the logged-in user for the target post.'''
+    def post(self, request, *args, **kwargs):
+        post = Post.objects.get(pk=self.kwargs['pk'])
+        my_profile = Profile.objects.get(user=request.user)
+
+        # Disallow liking your own post.
+        if post.profile == my_profile:
+            return redirect('post', pk=post.pk)
+
+        existing = Like.objects.filter(profile=my_profile, post=post)
+        if not existing.exists():
+            Like.objects.create(profile=my_profile, post=post)
+
+        return redirect('post', pk=post.pk)
+
+
+class UnlikePostView(LoginRequiredMixin, View):
+    '''Delete the logged-in user's like for the target post.'''
+
+    def post(self, request, *args, **kwargs):
+        post = Post.objects.get(pk=self.kwargs['pk'])
+        my_profile = Profile.objects.get(user=request.user)
+
+        Like.objects.filter(profile=my_profile, post=post).delete()
+        return redirect('post', pk=post.pk)
     
 class CreatePostView(LoginRequiredMixin, CreateView):
     '''

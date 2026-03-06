@@ -20,6 +20,19 @@
     <p><strong>Likes: {{ post.get_likes|length }}</strong></p>
     <p>{{post.caption}}</p>
     <p><small>{{post.timestamp}}</small></p>
+    {% if request.user.is_authenticated and request.user != post.profile.user %}
+      {% if is_liked %}
+      <form action="{% url 'delete_like' post.pk %}" method="POST">
+        {% csrf_token %}
+        <input type="submit" value="Unlike" />
+      </form>
+      {% else %}
+      <form action="{% url 'like' post.pk %}" method="POST">
+        {% csrf_token %}
+        <input type="submit" value="Like" />
+      </form>
+      {% endif %}
+    {% endif %}
     {% if request.user.is_authenticated and request.user == post.profile.user %}
     <a href="{% url 'delete_post' post.pk %}">Delete Post</a>
     <a href="{% url 'update_post' post.pk %}">Edit Post</a>

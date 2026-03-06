@@ -13,6 +13,19 @@
     <p>{{profile.bio_text}}</p>
     <p>Followers: {{ profile.get_followers|length }}</p>
     <p>Following: {{ profile.get_following|length }}</p>
+    {% if request.user.is_authenticated and request.user != profile.user %}
+      {% if is_following %}
+      <form action="{% url 'delete_follow' profile.pk %}" method="POST">
+        {% csrf_token %}
+        <input type="submit" value="Unfollow" />
+      </form>
+      {% else %}
+      <form action="{% url 'follow' profile.pk %}" method="POST">
+        {% csrf_token %}
+        <input type="submit" value="Follow" />
+      </form>
+      {% endif %}
+    {% endif %}
     {% if request.user.is_authenticated and request.user == profile.user %}
     <div>
       <a href="{% url 'show_feed' %}">View Feed</a>
