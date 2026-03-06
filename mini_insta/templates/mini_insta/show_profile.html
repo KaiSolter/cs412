@@ -3,55 +3,100 @@
 <!--Description: Display single profile for mini_insta app -->
 
 {% extends 'mini_insta/base.html' %} {% block content%}
-<h1>{{profile.username}}</h1>
-<div>
-  <div>
-    <div>
-      <h2>{{ profile.display_name }}<h2>
+
+<!-- Profile Header Section -->
+<div class="profile-header">
+  <div class="profile-header-content">
+    <!-- Profile Picture -->
+    <div class="profile-picture">
+      <img src="{{profile.profile_image_url}}" alt="{{profile.username}}" />
     </div>
-    <img src="{{profile.profile_image_url}}" alt="" />
-    <p>{{profile.bio_text}}</p>
-    <p>Followers: {{ profile.get_followers|length }}</p>
-    <p>Following: {{ profile.get_following|length }}</p>
-    {% if request.user.is_authenticated and request.user != profile.user %}
-      {% if is_following %}
-      <form action="{% url 'delete_follow' profile.pk %}" method="POST">
-        {% csrf_token %}
-        <input type="submit" value="Unfollow" />
-      </form>
-      {% else %}
-      <form action="{% url 'follow' profile.pk %}" method="POST">
-        {% csrf_token %}
-        <input type="submit" value="Follow" />
-      </form>
-      {% endif %}
-    {% endif %}
-    {% if request.user.is_authenticated and request.user == profile.user %}
-    <div>
-      <a href="{% url 'show_feed' %}">View Feed</a>
-      <a href="{% url 'update_profile' %}">Edit Profile</a>
+
+    <!-- Profile Info -->
+    <div class="profile-info">
+      <div class="profile-username-row">
+        <h1>{{profile.username}}</h1>
+        <!-- Follow/Unfollow Button -->
+        {% if request.user.is_authenticated and request.user != profile.user %}
+        {% if is_following %}
+        <form
+          action="{% url 'delete_follow' profile.pk %}"
+          method="POST"
+          class="follow-action"
+        >
+          {% csrf_token %}
+          <input type="submit" value="Unfollow" class="btn-unfollow" />
+        </form>
+        {% else %}
+        <form
+          action="{% url 'follow' profile.pk %}"
+          method="POST"
+          class="follow-action"
+        >
+          {% csrf_token %}
+          <input type="submit" value="Follow" class="btn-follow" />
+        </form>
+        {% endif %} {% endif %}
+
+        <!-- Edit/View Feed for Own Profile -->
+        {% if request.user.is_authenticated and request.user == profile.user %}
+        <div class="profile-actions">
+          <a href="{% url 'update_profile' %}" class="btn-action"
+            >Edit Profile</a
+          >
+          <a href="{% url 'show_feed' %}" class="btn-action">View Feed</a>
+        </div>
+        {% endif %}
+      </div>
+
+      <!-- Stats Row -->
+      <div class="profile-stats">
+        <div class="stat">
+          <span class="stat-count">{{ profile.get_all_posts|length }}</span>
+          <span class="stat-label">Posts</span>
+        </div>
+        <div class="stat">
+          <span class="stat-count">{{ profile.get_followers|length }}</span>
+          <span class="stat-label">Followers</span>
+        </div>
+        <div class="stat">
+          <span class="stat-count">{{ profile.get_following|length }}</span>
+          <span class="stat-label">Following</span>
+        </div>
+      </div>
+
+      <!-- Bio Section -->
+      <div class="profile-bio">
+        <h2>{{profile.display_name}}</h2>
+        <p>{{profile.bio_text}}</p>
+        <p class="join-date">Joined {{profile.join_date|date:"M d, Y"}}</p>
+      </div>
     </div>
-    {% endif %}
   </div>
-  <p>{{profile.join_date}}</p>
-  <hr />
-  <div>
-    <h2>Posts</h2>
+</div>
+
+<!-- Posts Section -->
+<div class="posts-section">
+  <h2>Posts</h2>
+  <div class="posts-grid">
     {% for post in profile.get_all_posts %}
-    <div>
-      {% with first_photo=post.get_all_photos.first %}
-      {% if first_photo %}
+    <div class="post-card">
+      {% with first_photo=post.get_all_photos.first %} {% if first_photo %}
       <a href="{% url 'post' post.pk %}">
         <img src="{{first_photo.get_image_url}}" alt="" />
       </a>
       {% else %}
       <a href="{% url 'post' post.pk %}">
-        <img src="https://upload.wikimedia.org/wikipedia/commons/a/a3/Image-not-found.png?20210521171500" alt="" />
+        <img
+          src="https://upload.wikimedia.org/wikipedia/commons/a/a3/Image-not-found.png?20210521171500"
+          alt=""
+        />
       </a>
-      {% endif %}
-      {% endwith %}
-       <p>{{post.caption}}</p>
+      {% endif %} {% endwith %}
+      <p>{{post.caption}}</p>
     </div>
     {% endfor %}
+  </div>
 </div>
+
 {% endblock %}
