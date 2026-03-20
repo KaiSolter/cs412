@@ -3,6 +3,7 @@
 # Description: Models for voter_analytics app 
 import csv
 import datetime
+from urllib.parse import quote_plus
 
 from django.db import models
 from django.contrib.auth.models import User
@@ -36,6 +37,10 @@ class Voter(models.Model):
         :param self: Description
         '''
         return f'{self.FirstName} {self.LastName} in Precinct {self.PrecinctNumber}. Voter Score: {self.voter_score}'
+
+    def get_google_maps_url(self):
+        address = f'{self.StreetNumber} {self.StreetName} {self.ZipCode} Newton MA'
+        return f'https://www.google.com/maps/search/?api=1&query={quote_plus(address)}'
     
     def load_data():
         '''Load data from the Newton voter CSV file into the database.'''

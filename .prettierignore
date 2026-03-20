@@ -1,0 +1,2 @@
+# Ignore Django templates so template tags are not reformatted unexpectedly
+**/templates/**/*.html

@@ -1,0 +1,26 @@
+<!-- File: voter_analytics/templates/voter_analytics/voter.html -->
+<!-- Author: Kai Solter (ksolter@bu.edu), 3/20/2026 -->
+<!--Description: Template for displaying a single voter record -->
+{% extends 'voter_analytics/base.html' %} {% block content %}
+<h1>Voter Record</h1>
+
+<p><a href="{% url 'voters' %}">Back to all voters</a></p>
+
+<div>
+  <p><strong>Name:</strong> {{ voter.FirstName }} {{ voter.LastName }}</p>
+  <p><strong>Street Address:</strong> {{ voter.StreetNumber }} {{ voter.StreetName }}</p>
+  <p><strong>Apartment Number:</strong> {{ voter.AppartmentNumber }}</p>
+  <p><strong>Zip Code:</strong> {{ voter.ZipCode }}</p>
+  <p><a href="{{ voter.get_google_maps_url }}" target="_blank" rel="noopener noreferrer">View address on Google Maps</a></p>
+  <p><strong>Date of Birth:</strong> {{ voter.DateOfBirth }}</p>
+  <p><strong>Date of Registration:</strong> {{ voter.DateOfRegistration }}</p>
+  <p><strong>Party Affiliation:</strong> {{ voter.PartyAffiliation }}</p>
+  <p><strong>Precinct Number:</strong> {{ voter.PrecinctNumber }}</p>
+  <p><strong>Voted in v20state:</strong> {{ voter.v20state }}</p>
+  <p><strong>Voted in v21town:</strong> {{ voter.v21town }}</p>
+  <p><strong>Voted in v21primary:</strong> {{ voter.v21primary }}</p>
+  <p><strong>Voted in v22general:</strong> {{ voter.v22general }}</p>
+  <p><strong>Voted in v23town:</strong> {{ voter.v23town }}</p>
+  <p><strong>Voter Score:</strong> {{ voter.voter_score }}</p>
+</div>
+{% endblock %}
