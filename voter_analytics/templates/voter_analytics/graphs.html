@@ -1,0 +1,76 @@
+<!-- File: voter_analytics/templates/voter_analytics/graphs.html -->
+<!-- Author: Kai Solter (ksolter@bu.edu), 3/20/2026 -->
+<!--Description: Template for displaying graphs -->
+{% extends 'voter_analytics/base.html' %} {% block content%} 
+<h1>Graphs</h1>
+<form method="get" action="{% url 'graph' %}">
+  <p>
+    <label for="party">Party affiliation:</label>
+    <select name="party" id="party">
+      <option value="">Any</option>
+      {% for party in parties %}
+      <option value="{{ party }}" {% if selected.party == party %}selected{% endif %}>{{ party }}</option>
+      {% endfor %}
+    </select>
+  </p>
+
+  <p>
+    <label for="min_year">Minimum year of birth:</label>
+    <select name="min_year" id="min_year">
+      <option value="">Any</option>
+      {% for year in years %}
+      <option value="{{ year }}" {% if selected.min_year == year|stringformat:"s" %}selected{% endif %}>{{ year }}</option>
+      {% endfor %}
+    </select>
+  </p>
+
+  <p>
+    <label for="max_year">Maximum year of birth:</label>
+    <select name="max_year" id="max_year">
+      <option value="">Any</option>
+      {% for year in years %}
+      <option value="{{ year }}" {% if selected.max_year == year|stringformat:"s" %}selected{% endif %}>{{ year }}</option>
+      {% endfor %}
+    </select>
+  </p>
+
+  <p>
+    <label for="voter_score">Voter score:</label>
+    <select name="voter_score" id="voter_score">
+      <option value="">Any</option>
+      {% for score in voter_scores %}
+      <option value="{{ score }}" {% if selected.voter_score == score|stringformat:"s" %}selected{% endif %}>{{ score }}</option>
+      {% endfor %}
+    </select>
+  </p>
+
+  <fieldset>
+    <legend>Voted in elections</legend>
+    <label><input type="checkbox" name="v20state" value="1" {% if selected.v20state %}checked{% endif %}> v20state</label>
+    <label><input type="checkbox" name="v21town" value="1" {% if selected.v21town %}checked{% endif %}> v21town</label>
+    <label><input type="checkbox" name="v21primary" value="1" {% if selected.v21primary %}checked{% endif %}> v21primary</label>
+    <label><input type="checkbox" name="v22general" value="1" {% if selected.v22general %}checked{% endif %}> v22general</label>
+    <label><input type="checkbox" name="v23town" value="1" {% if selected.v23town %}checked{% endif %}> v23town</label>
+  </fieldset>
+
+  <p>
+    <button type="submit">Filter</button>
+    <a href="{% url 'graph' %}">Reset</a>
+  </p>
+</form>
+
+<script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+
+<div>
+  {{ birth_year_chart|safe }}
+</div>
+
+<div>
+  {{ party_chart|safe }}
+</div>
+
+<div>
+  {{ election_chart|safe }}
+</div>
+
+{% endblock %}
