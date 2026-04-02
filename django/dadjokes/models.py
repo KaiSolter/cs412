@@ -1,3 +1,7 @@
+# File: mini_insta/admin.py
+# Author: Kai Solter (ksolter@bu.edu), 2/13/2026
+# Description: Admin configuration for mini_insta app
+
 from django.db import models
 
 # Create your models here.

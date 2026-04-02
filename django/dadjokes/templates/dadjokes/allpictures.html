@@ -7,8 +7,8 @@
   <h1>All Pictures</h1>
   {% for picture in pictures %}
   <div>
-    <img src="{{ picture.image.url }}" />
-    <p>{{ picture.contributor }}</p>
+    <img src="{{ picture.image_url }}" alt="Dad joke upload" />
+    <p>{{ picture.contributer }}</p>
     <p><small>{{ picture.timestamp }}</small></p>
   </div>
   {% empty %}

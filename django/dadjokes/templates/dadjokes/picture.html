@@ -6,12 +6,9 @@
 <div>
   <h1>Picture</h1>
   <div>
-    <img src="{{ picture.image.url }}" />
-    <p>{{ picture.contributor }}</p>
+    <img src="{{ picture.image_url }}" alt="Dad joke upload" />
+    <p>{{ picture.contributer }}</p>
     <p><small>{{ picture.timestamp }}</small></p>
   </div>
-  {% empty %}
-  <p>No picture found.</p>
-  {% endfor %}
 
 {% endblock %}

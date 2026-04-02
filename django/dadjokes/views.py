@@ -3,10 +3,10 @@
 # Description: Views for Dad Jokes app 
 
 import random
-from django.shortcuts import render
+from django.http import Http404
 from django.views.generic import ListView, DetailView
 
-from django.dadjokes.models import Joke, Picture
+from  .models import Joke, Picture
 
 # Create your views here.
 class JokeListView(ListView):
@@ -31,13 +31,22 @@ class PictureDetailView(DetailView):
     
 class RandomJokeView(DetailView):
     model = Joke
-    template_name = 'dadjokes/joke.html'
+    template_name = 'dadjokes/random.html'
     context_object_name = 'joke'
-    
+
     def get_object(self, queryset=None):
-        jokes = Joke.objects.all()
-        if jokes:
-            return random.choice(jokes)
-        return None
+        queryset = queryset or Joke.objects.all()
+        if not queryset.exists():
+            raise Http404('No jokes available.')
+        return random.choice(queryset)
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        pictures = Picture.objects.all()
+        if pictures:
+            context['picture'] = random.choice(pictures)
+        else:
+            context['picture'] = None
+        return context
     
     

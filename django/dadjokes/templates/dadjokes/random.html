@@ -1,6 +1,6 @@
-<!-- File: django/dadjokes/templates/dadjokes/joke.html -->
+<!-- File: django/dadjokes/templates/dadjokes/random.html -->
 <!-- Author: Kai Solter (ksolter@bu.edu), 4/2/2026 -->
-<!--Description: Template for displaying a single joke in dadjokes app -->
+<!--Description: Template for displaying a single joke and image in dadjokes app -->
 {% extends "dadjokes/base.html" %} {% block content %} 
 
 <div>
@@ -8,6 +8,8 @@
     <p>{{ joke.text }}</p>
     <p>{{ joke.contributer }}</p>
     <p><small>{{ joke.timestamp }}</small></p>
-  </div>
+    <h1>Picture</h1>
+    <img src="{{ picture.image_url }}" />
+</div>
 
 {% endblock %}
