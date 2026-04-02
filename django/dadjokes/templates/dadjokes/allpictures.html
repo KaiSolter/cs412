@@ -1,0 +1,18 @@
+<!-- File: django/dadjokes/templates/dadjokes/allpictures.html -->
+<!-- Author: Kai Solter (ksolter@bu.edu), 4/2/2026 -->
+<!--Description: Template for displaying all pictures in dadjokes app -->
+{% extends "dadjokes/base.html" %} {% block content %} 
+
+<div>
+  <h1>All Pictures</h1>
+  {% for picture in pictures %}
+  <div>
+    <img src="{{ picture.image.url }}" />
+    <p>{{ picture.contributor }}</p>
+    <p><small>{{ picture.timestamp }}</small></p>
+  </div>
+  {% empty %}
+  <p>No pictures found.</p>
+  {% endfor %}
+
+{% endblock %}

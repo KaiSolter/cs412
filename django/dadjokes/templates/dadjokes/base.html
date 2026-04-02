@@ -1,0 +1,16 @@
+<!-- File: django/dadjokes/templates/dadjokes/base.html -->
+<!-- Author: Kai Solter (ksolter@bu.edu), 4/2/2026 -->
+<!--Description: Base template for dadjokes app -->
+{% load static %}
+<html>
+  <head>
+    <title>Dad Jokes</title>
+    {% comment %} <link rel="stylesheet" href="{%static 'styles-dadjokes.css' %}?v=5" /> {% endcomment %}
+  </head>
+  <body>
+    <header class="app-header">
+      <h1>Dad Jokes</h1>
+    </header>
+    {% block content %} {% endblock %}W
+  </body>
+</html>

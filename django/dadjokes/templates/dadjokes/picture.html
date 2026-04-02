@@ -1,0 +1,17 @@
+<!-- File: django/dadjokes/templates/dadjokes/picture.html -->
+<!-- Author: Kai Solter (ksolter@bu.edu), 4/2/2026 -->
+<!--Description: Template for displaying a single picture in dadjokes app -->
+{% extends "dadjokes/base.html" %} {% block content %} 
+
+<div>
+  <h1>Picture</h1>
+  <div>
+    <img src="{{ picture.image.url }}" />
+    <p>{{ picture.contributor }}</p>
+    <p><small>{{ picture.timestamp }}</small></p>
+  </div>
+  {% empty %}
+  <p>No picture found.</p>
+  {% endfor %}
+
+{% endblock %}

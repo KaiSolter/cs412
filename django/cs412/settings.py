@@ -38,6 +38,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'rest_framework',
     'hw', #example app
     'quotes', #assignment one
     'formdata', #example two
@@ -46,6 +47,7 @@ INSTALLED_APPS = [
     'mini_insta', #assignment three
     'marathon_analytics', #example four,
     'voter_analytics', #assignment four
+    'dadjokes', #assignment nine
 ]
 
 MIDDLEWARE = [
@@ -133,6 +135,11 @@ STATICFILES_DIRS = [
 
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media/')
 MEDIA_URL= "/media/"
+
+REST_FRAMEWORK = {
+    'DEFAULT_PAGINATION_CLASS': 'rest_framework.pagination.PageNumberPagination',
+    'PAGE_SIZE': 10
+}
 
 import socket
 CS_DEPLOYMENT_HOSTNAME = 'cs-webapps.bu.edu'

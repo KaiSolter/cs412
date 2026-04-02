@@ -1,0 +1,16 @@
+<!-- File: django/dadjokes/templates/dadjokes/joke.html -->
+<!-- Author: Kai Solter (ksolter@bu.edu), 4/2/2026 -->
+<!--Description: Template for displaying a single joke in dadjokes app -->
+{% extends "dadjokes/base.html" %} {% block content %} 
+
+<div>
+  <h1>Joke</h1>
+    <p>{{ joke.text }}</p>
+    <p>{{ joke.contributor }}</p>
+    <p><small>{{ joke.timestamp }}</small></p>
+  </div>
+  {% empty %}
+  <p>No jokes found.</p>
+  {% endfor %}
+
+{% endblock %}
