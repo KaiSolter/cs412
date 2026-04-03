@@ -5,6 +5,9 @@
 import random
 from django.http import Http404
 from django.views.generic import ListView, DetailView
+from rest_framework import generics
+from .serializers import *
+
 
 from  .models import Joke, Picture
 
@@ -49,4 +52,39 @@ class RandomJokeView(DetailView):
             context['picture'] = None
         return context
     
+class RandomJokeAPIView(generics.RetrieveAPIView):
+    queryset = Joke.objects.all()
+    serializer_class = JokeSerializer
+
+    def get_object(self):
+        queryset = self.get_queryset()
+        if not queryset.exists():
+            raise Http404('No jokes available.')
+        return random.choice(queryset)
+    
+class JokeListAPIView(generics.ListAPIView):
+    queryset = Joke.objects.all()
+    serializer_class = JokeSerializer
+    
+class JokeDetailAPIView(generics.RetrieveAPIView):
+    queryset = Joke.objects.all()
+    serializer_class = JokeSerializer
+    
+class PictureListAPIView(generics.ListAPIView):
+    queryset = Picture.objects.all()
+    serializer_class = PictureSerializer
+
+class PictureDetailAPIView(generics.RetrieveAPIView):
+    queryset = Picture.objects.all()
+    serializer_class = PictureSerializer
+    
+class RandomPictureAPIView(generics.RetrieveAPIView):
+    queryset = Picture.objects.all()
+    serializer_class = PictureSerializer
+
+    def get_object(self):
+        queryset = self.get_queryset()
+        if not queryset.exists():
+            raise Http404('No pictures available.')
+        return random.choice(queryset)
     
