@@ -1,4 +1,4 @@
-import { Text, View, Image } from 'react-native';
+import { Text, View, Image, Pressable } from 'react-native';
 import {useState, useEffect} from 'react';
 import styles from '../../assets/my_styles';
 
@@ -23,6 +23,11 @@ export default function IndexScreen() {
     fetchData(`https://cs-webapps.bu.edu/ksolter/dadjokes/api/random_picture/`, false);
   }, []);
 
+  const handleNextJoke = () => {
+    fetchData(`https://cs-webapps.bu.edu/ksolter/dadjokes/api/random/`, true);
+    fetchData(`https://cs-webapps.bu.edu/ksolter/dadjokes/api/random_picture/`, false);
+  };
+
   return (
     <View style={styles.mediumContainer}>
       <View style={styles.smallContainer}>
@@ -31,6 +36,12 @@ export default function IndexScreen() {
         </View>
         <Text style={styles.subTitleText}>Here's a random joke by {joke.contributer}:</Text>
         <Text style={styles.paragraphText}>{joke.text}</Text>
+        <Pressable
+          style={({ pressed }) => [styles.submitButton, pressed && styles.submitButtonPressed]}
+          onPress={handleNextJoke}
+        >
+          <Text style={styles.submitButtonText}>Next Joke</Text>
+        </Pressable>
       </View>
       <Image style={styles.image} source={{ uri: image.image_url }} />
     </View>
