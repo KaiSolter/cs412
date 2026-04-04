@@ -1,4 +1,4 @@
-import { Text, View } from 'react-native';
+import { Text, View, ScrollView } from 'react-native';
 import {useState, useEffect} from 'react';
 import styles from '../../assets/my_styles';
 
@@ -22,16 +22,19 @@ export default function JokesListScreen() {
   }, []);
 
   return (
-    <View style={styles.textContainer}>
-      <Text style={styles.titleText}>Jokes List</Text>
-      {jokes.map((joke) => (
-        <View key={joke.id} style={styles.textContainer}>
-          <Text style={styles.paragraphText}>{joke.text}</Text>
-          <Text style={styles.paragraphText}>Contributed by: {joke.contributer}</Text>
-          <Text style={styles.paragraphText}>Timestamp: {joke.timestamp}</Text>
+    <ScrollView>
+      <View style={styles.mediumContainer}>
+        <View style={styles.titleContainer}>
+          <Text style={styles.titleText}>Jokes List</Text>
         </View>
-      ))}
-
-    </View>
+        {jokes.map((joke) => (
+          <View key={joke.id} style={styles.smallContainer}>
+            <Text style={styles.paragraphText}>{joke.text}</Text>
+            <Text style={styles.paragraphText}>Contributed by: {joke.contributer}</Text>
+            <Text style={styles.paragraphText}>Timestamp: {joke.timestamp}</Text>
+          </View>
+        ))}
+      </View>
+    </ScrollView>
   );
 }

@@ -48,6 +48,7 @@ INSTALLED_APPS = [
     'marathon_analytics', #example four,
     'voter_analytics', #assignment four
     'dadjokes', #assignment nine
+    'corsheaders', #added for CORS
 ]
 
 MIDDLEWARE = [
@@ -58,6 +59,7 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'corsheaders.middleware.CorsMiddleware',
 ]
 
 ROOT_URLCONF = 'cs412.urls'
@@ -147,3 +149,6 @@ CS_DEPLOYMENT_HOSTNAME = 'cs-webapps.bu.edu'
 if socket.gethostname() == CS_DEPLOYMENT_HOSTNAME:
     STATIC_URL = '/ksolter/static/'
     MEDIA_URL = '/ksolter/media/'
+
+# Allow all origins for CORS
+CORS_ALLOW_ALL_ORIGINS = True

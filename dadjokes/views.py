@@ -62,7 +62,7 @@ class RandomJokeAPIView(generics.RetrieveAPIView):
             raise Http404('No jokes available.')
         return random.choice(queryset)
     
-class JokeListAPIView(generics.ListAPIView):
+class JokeListAPIView(generics.ListCreateAPIView):
     queryset = Joke.objects.all()
     serializer_class = JokeSerializer
     

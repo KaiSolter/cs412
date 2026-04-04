@@ -24,10 +24,14 @@ export default function IndexScreen() {
   }, []);
 
   return (
-    <View>
-      <Text style={styles.titleText}>Random Joke</Text>
-      <Text style={styles.subTitleText}>Here's a random joke by {joke.contributer}:</Text>
-      <Text style={styles.paragraphText}>{joke.text}</Text>
+    <View style={styles.mediumContainer}>
+      <View style={styles.smallContainer}>
+        <View style={styles.titleContainer}>
+          <Text style={styles.titleText}>Random Joke</Text>
+        </View>
+        <Text style={styles.subTitleText}>Here's a random joke by {joke.contributer}:</Text>
+        <Text style={styles.paragraphText}>{joke.text}</Text>
+      </View>
       <Image style={styles.image} source={{ uri: image.image_url }} />
     </View>
   );
