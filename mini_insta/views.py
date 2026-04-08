@@ -1,7 +1,7 @@
 # File: mini_insta/views.py
 # Author: Kai Solter (ksolter@bu.edu), 2/13/2026 
 # Description: Views for mini_insta app 
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, get_object_or_404
 from django.views import View
 from django.views.generic import CreateView, ListView, DetailView, UpdateView, DeleteView
 from django.urls import reverse
@@ -11,9 +11,11 @@ from django.core.exceptions import PermissionDenied
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth import login
 from django.utils import timezone
+from rest_framework import generics
 
 from mini_insta.forms import CreatePostForm, CreateProfileForm, UpdateProfileForm
 from .models import *
+from .serializers import *
 # Create your views here.
 class ProfileListView(ListView):
     '''
@@ -391,3 +393,52 @@ class CreateProfileView(CreateView):
             return super().form_valid(form)
         else:
             return self.render_to_response(self.get_context_data(form=form, user_creation_form=UCF))
+        
+class ProfileListAPIView(generics.ListCreateAPIView):
+    queryset = Profile.objects.all()
+    serializer_class = ProfileSerializer
+
+class ProfileDetailAPIView(generics.RetrieveAPIView):
+    queryset = Profile.objects.all()
+    serializer_class = ProfileSerializer
+    
+class PostListAPIView(generics.ListCreateAPIView):
+    queryset = Post.objects.all()
+    serializer_class = PostSerializer
+    
+    def get_queryset(self):
+        profile_pk = self.kwargs.get('profile_pk')  # from URL
+        profile = get_object_or_404(Profile, pk=profile_pk)
+        return Post.objects.filter(profile=profile).order_by('-timestamp')
+
+    def perform_create(self, serializer):
+        profile_pk = self.kwargs.get('profile_pk')
+        profile = get_object_or_404(Profile, pk=profile_pk)
+        serializer.save(profile=profile)
+        
+class PostDetailAPIView(generics.RetrieveAPIView):
+    queryset = Post.objects.all()
+    serializer_class = PostSerializer
+
+class PhotoListAPIView(generics.ListAPIView):
+    queryset = Photo.objects.all()
+    serializer_class = PhotoSerializer
+
+    def get_queryset(self):
+        post_pk = self.kwargs.get('post_pk')
+        post = get_object_or_404(Post, pk=post_pk)
+        return Photo.objects.filter(post=post).order_by('-timestamp')
+
+class PhotoCreateAPIView(generics.CreateAPIView):
+    queryset = Photo.objects.all()
+    serializer_class = PhotoSerializer
+
+class PostFeedListAPIView(generics.ListAPIView):
+    serializer_class = PostSerializer
+
+    def get_queryset(self):
+        profile_pk = self.kwargs.get('profile_pk')
+        profile = get_object_or_404(Profile, pk=profile_pk)
+        following_profiles = profile.get_following()
+        return Post.objects.filter(profile__in=following_profiles).order_by('-timestamp')
+    

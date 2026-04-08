@@ -26,4 +26,11 @@ urlpatterns = [
     path('profile/<int:pk>/delete_follow', DeleteFollowView.as_view(), name='delete_follow'),
     path('post/<int:pk>/like', LikePostView.as_view(), name='like'),
     path('post/<int:pk>/delete_like', UnlikePostView.as_view(), name='delete_like'),
+    path('api/profiles/', ProfileListAPIView.as_view(), name='api_profiles'),
+    path('api/profiles/<int:pk>/', ProfileDetailAPIView.as_view(), name='api_profile_detail'),
+    path('api/posts/<int:pk>/', PostDetailAPIView.as_view(), name='api_post_detail'),
+    path('api/profiles/<int:profile_pk>/posts/', PostListAPIView.as_view(), name='api_profile_posts'),
+    path('api/posts/<int:post_pk>/photos/', PhotoListAPIView.as_view(), name='api_post_photos'),
+    path('api/photos/create/', PhotoCreateAPIView.as_view(), name='api_photo_create'),
+    path('api/profiles/<int:profile_pk>/feed/', PostFeedListAPIView.as_view(), name='api_profile_feed'),
 ]
