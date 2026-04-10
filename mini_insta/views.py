@@ -478,5 +478,12 @@ class LoginApiView(generics.GenericAPIView):
         if user:
             login(request, user)
             token, created = Token.objects.get_or_create(user=user)
-            return Response({'token': token.key})
+            profile = Profile.objects.filter(user=user).first()
+            if not profile:
+                return Response(
+                    {'error': 'No profile found for this user.'},
+                    status=status.HTTP_404_NOT_FOUND,
+                )
+
+            return Response({'token': token.key, 'profile_id': profile.pk})
         return Response({'error': 'Invalid credentials'}, status=status.HTTP_401_UNAUTHORIZED)

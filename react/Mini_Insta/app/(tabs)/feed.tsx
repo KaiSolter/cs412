@@ -3,7 +3,6 @@ import styles from '../../assets/my_styles';
 import { Text, View, ScrollView, Image } from 'react-native';
 import { useAuth } from '@/context/AuthContext';
 
-const thisProfile = 1;
 const SITE_BASE_URL = 'https://cs-webapps.bu.edu';
 const API_BASE_URL = 'https://cs-webapps.bu.edu/ksolter/mini_insta/api';
 
@@ -40,7 +39,7 @@ const resolvePhotoUri = (photo: Photos): string | null => {
 };
 
 export default function Feed() {
-  const { token } = useAuth();
+  const { token, profileId } = useAuth();
 
   const getAuthHeaders = (): Record<string, string> => {
     if (!token) {
@@ -74,8 +73,12 @@ export default function Feed() {
   };
 
   useEffect(() => {
-    fetchFeed(`${API_BASE_URL}/profiles/${thisProfile}/feed/`);
-  }, []);
+    if (!profileId) {
+      return;
+    }
+
+    fetchFeed(`${API_BASE_URL}/profiles/${profileId}/feed/`);
+  }, [profileId]);
 
   useEffect(() => {
     if (feed.length === 0) {
@@ -113,7 +116,6 @@ export default function Feed() {
         <View style={styles.titleContainer}>
           <Text style={styles.titleText}>Feed</Text>
         </View>
-        <Text style={styles.titleText}>Feed</Text>
         <View style={styles.mediumContainer}>
           {feed.map((post) => (
               <View key={post.id} style={styles.smallContainer}>

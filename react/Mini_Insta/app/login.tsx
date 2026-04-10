@@ -9,11 +9,12 @@ const API_BASE_URL = 'https://cs-webapps.bu.edu/ksolter/mini_insta/api';
 
 type LoginResponse = {
   token: string;
+  profile_id: number;
 };
 
 export default function LoginScreen() {
   const router = useRouter();
-  const { token, setToken } = useAuth();
+  const { token, setAuth } = useAuth();
 
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
@@ -47,12 +48,12 @@ export default function LoginScreen() {
 
       const data = await response.json();
 
-      if (!response.ok || !data?.token) {
+      if (!response.ok || !data?.token || !data?.profile_id) {
         throw new Error(data?.error ?? 'Login failed.');
       }
 
       const loginData = data as LoginResponse;
-      setToken(loginData.token);
+      setAuth(loginData.token, loginData.profile_id);
       router.replace('/(tabs)/feed');
     } catch (error) {
       const message = error instanceof Error ? error.message : 'Something went wrong.';

@@ -3,7 +3,6 @@ import styles from '../../assets/my_styles';
 import { useState, useEffect } from 'react';
 import { useAuth } from '@/context/AuthContext';
 
-const thisProfile = 1;
 const SITE_BASE_URL = 'https://cs-webapps.bu.edu';
 const API_BASE_URL = 'https://cs-webapps.bu.edu/ksolter/mini_insta/api';
 
@@ -34,7 +33,7 @@ const resolveImageUri = (imageUrl?: string | null): string | null => {
 };
 
 export default function Profile() {
-  const { token, logout } = useAuth();
+  const { token, profileId, logout } = useAuth();
 
   const getAuthHeaders = (): Record<string, string> => {
     if (!token) {
@@ -57,8 +56,12 @@ export default function Profile() {
   };
 
   useEffect(() => {
-    fetchProfile(`${API_BASE_URL}/profiles/${thisProfile}/`);
-  }, []);
+    if (!profileId) {
+      return;
+    }
+
+    fetchProfile(`${API_BASE_URL}/profiles/${profileId}/`);
+  }, [profileId]);
 
   const profileImageUri = resolveImageUri(profile?.profile_image_url);
   const joinedLabel = profile?.join_date

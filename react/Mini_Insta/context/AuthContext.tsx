@@ -2,7 +2,10 @@ import { createContext, ReactNode, useContext, useMemo, useState } from 'react';
 
 type AuthContextValue = {
   token: string | null;
+  profileId: number | null;
   setToken: (token: string | null) => void;
+  setProfileId: (profileId: number | null) => void;
+  setAuth: (token: string | null, profileId: number | null) => void;
   logout: () => void;
 };
 
@@ -14,14 +17,24 @@ type AuthProviderProps = {
 
 export function AuthProvider({ children }: AuthProviderProps) {
   const [token, setToken] = useState<string | null>(null);
+  const [profileId, setProfileId] = useState<number | null>(null);
 
   const value = useMemo(
     () => ({
       token,
+      profileId,
       setToken,
-      logout: () => setToken(null),
+      setProfileId,
+      setAuth: (nextToken: string | null, nextProfileId: number | null) => {
+        setToken(nextToken);
+        setProfileId(nextProfileId);
+      },
+      logout: () => {
+        setToken(null);
+        setProfileId(null);
+      },
     }),
-    [token]
+    [token, profileId]
   );
 
   return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>;

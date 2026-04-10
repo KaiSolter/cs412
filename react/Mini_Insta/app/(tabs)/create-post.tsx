@@ -3,7 +3,6 @@ import { Alert, Pressable, ScrollView, Text, TextInput, View } from 'react-nativ
 import styles from '../../assets/my_styles';
 import { useAuth } from '@/context/AuthContext';
 
-const thisProfile = 1;
 const API_BASE_URL = 'https://cs-webapps.bu.edu/ksolter/mini_insta/api';
 
 type CreatedPost = {
@@ -12,7 +11,7 @@ type CreatedPost = {
 };
 
 export default function CreatePost() {
-  const { token } = useAuth();
+  const { token, profileId } = useAuth();
 
   const getAuthHeaders = (): Record<string, string> => {
     if (!token) {
@@ -29,6 +28,11 @@ export default function CreatePost() {
   const [isSubmitting, setIsSubmitting] = useState(false);
 
   const createPost = async () => {
+    if (!profileId) {
+      Alert.alert('Missing profile', 'No profile is associated with the current login session.');
+      return;
+    }
+
     if (!caption.trim()) {
       Alert.alert('Missing caption', 'Please enter a caption before submitting.');
       return;
@@ -37,7 +41,7 @@ export default function CreatePost() {
     try {
       setIsSubmitting(true);
 
-      const postResponse = await fetch(`${API_BASE_URL}/profiles/${thisProfile}/posts/`, {
+      const postResponse = await fetch(`${API_BASE_URL}/profiles/${profileId}/posts/`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
