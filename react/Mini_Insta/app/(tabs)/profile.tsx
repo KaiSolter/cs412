@@ -1,6 +1,7 @@
-import { Text, View, Image } from 'react-native';
+import { Text, View, Image, Pressable } from 'react-native';
 import styles from '../../assets/my_styles';
 import { useState, useEffect } from 'react';
+import { useAuth } from '@/context/AuthContext';
 
 const thisProfile = 1;
 const SITE_BASE_URL = 'https://cs-webapps.bu.edu';
@@ -33,11 +34,24 @@ const resolveImageUri = (imageUrl?: string | null): string | null => {
 };
 
 export default function Profile() {
+  const { token, logout } = useAuth();
+
+  const getAuthHeaders = (): Record<string, string> => {
+    if (!token) {
+      return {};
+    }
+
+    return {
+      Authorization: `Token ${token}`,
+    };
+  };
 
   const [profile, setProfile] = useState<Profile | null>(null);
 
   const fetchProfile = async (url: string) =>{
-    const response = await fetch(url);
+    const response = await fetch(url, {
+      headers: getAuthHeaders(),
+    });
     const data = await response.json();
     setProfile(data);
   };
@@ -75,6 +89,15 @@ export default function Profile() {
               <Text style={styles.paragraphText}>Username: {profile.username}</Text>
               <Text style={styles.paragraphText}>Bio: {profile.bio_text || 'No bio yet.'}</Text>
               <Text style={styles.paragraphText}>Joined: {joinedLabel}</Text>
+              <Pressable
+                onPress={logout}
+                style={({ pressed }) => [
+                  styles.submitButton,
+                  pressed ? styles.submitButtonPressed : null,
+                ]}
+              >
+                <Text style={styles.submitButtonText}>Log Out</Text>
+              </Pressable>
             </View>
           )}
         </View>

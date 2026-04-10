@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { Alert, Pressable, ScrollView, Text, TextInput, View } from 'react-native';
 import styles from '../../assets/my_styles';
+import { useAuth } from '@/context/AuthContext';
 
 const thisProfile = 1;
 const API_BASE_URL = 'https://cs-webapps.bu.edu/ksolter/mini_insta/api';
@@ -11,6 +12,18 @@ type CreatedPost = {
 };
 
 export default function CreatePost() {
+  const { token } = useAuth();
+
+  const getAuthHeaders = (): Record<string, string> => {
+    if (!token) {
+      return {};
+    }
+
+    return {
+      Authorization: `Token ${token}`,
+    };
+  };
+
   const [caption, setCaption] = useState('');
   const [imageUrl, setImageUrl] = useState('');
   const [isSubmitting, setIsSubmitting] = useState(false);
@@ -28,6 +41,7 @@ export default function CreatePost() {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
+          ...getAuthHeaders(),
         },
         body: JSON.stringify({
           caption: caption.trim(),
@@ -45,6 +59,7 @@ export default function CreatePost() {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json',
+            ...getAuthHeaders(),
           },
           body: JSON.stringify({
             post: createdPost.id,

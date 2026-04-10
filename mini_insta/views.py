@@ -9,9 +9,14 @@ from django.db.models import Q
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.core.exceptions import PermissionDenied
 from django.contrib.auth.forms import UserCreationForm
-from django.contrib.auth import login
+from django.contrib.auth import authenticate, login
 from django.utils import timezone
 from rest_framework import generics
+from rest_framework.permissions import AllowAny, IsAuthenticated
+from rest_framework.authentication import TokenAuthentication
+from rest_framework.response import Response
+from rest_framework import status
+from rest_framework.authtoken.models import Token
 
 from mini_insta.forms import CreatePostForm, CreateProfileForm, UpdateProfileForm
 from .models import *
@@ -395,14 +400,20 @@ class CreateProfileView(CreateView):
             return self.render_to_response(self.get_context_data(form=form, user_creation_form=UCF))
         
 class ProfileListAPIView(generics.ListCreateAPIView):
+    authentication_classes = [TokenAuthentication]
+    permission_classes = [IsAuthenticated]
     queryset = Profile.objects.all()
     serializer_class = ProfileSerializer
 
 class ProfileDetailAPIView(generics.RetrieveAPIView):
+    authentication_classes = [TokenAuthentication]
+    permission_classes = [IsAuthenticated]
     queryset = Profile.objects.all()
     serializer_class = ProfileSerializer
     
 class PostListAPIView(generics.ListCreateAPIView):
+    authentication_classes = [TokenAuthentication]
+    permission_classes = [IsAuthenticated]
     queryset = Post.objects.all()
     serializer_class = PostSerializer
     
@@ -417,10 +428,14 @@ class PostListAPIView(generics.ListCreateAPIView):
         serializer.save(profile=profile)
         
 class PostDetailAPIView(generics.RetrieveAPIView):
+    authentication_classes = [TokenAuthentication]
+    permission_classes = [IsAuthenticated]
     queryset = Post.objects.all()
     serializer_class = PostSerializer
 
 class PhotoListAPIView(generics.ListAPIView):
+    authentication_classes = [TokenAuthentication]
+    permission_classes = [IsAuthenticated]
     queryset = Photo.objects.all()
     serializer_class = PhotoSerializer
 
@@ -430,10 +445,14 @@ class PhotoListAPIView(generics.ListAPIView):
         return Photo.objects.filter(post=post).order_by('-timestamp')
 
 class PhotoCreateAPIView(generics.CreateAPIView):
+    authentication_classes = [TokenAuthentication]
+    permission_classes = [IsAuthenticated]
     queryset = Photo.objects.all()
     serializer_class = PhotoSerializer
 
 class PostFeedListAPIView(generics.ListAPIView):
+    authentication_classes = [TokenAuthentication]
+    permission_classes = [IsAuthenticated]
     serializer_class = PostSerializer
 
     def get_queryset(self):
@@ -442,3 +461,18 @@ class PostFeedListAPIView(generics.ListAPIView):
         following_profiles = profile.get_following()
         return Post.objects.filter(profile__in=following_profiles).order_by('-timestamp')
     
+class LoginApiView(generics.GenericAPIView):
+    authentication_classes = []
+    permission_classes = [AllowAny]
+    
+    def post(self, request):
+        user = authenticate(
+            request,
+            username=request.data.get('username'),
+            password=request.data.get('password')
+        )
+        if user:
+            login(request, user)
+            token, created = Token.objects.get_or_create(user=user)
+            return Response({'token': token.key})
+        return Response({'error': 'Invalid credentials'}, status=status.HTTP_401_UNAUTHORIZED)

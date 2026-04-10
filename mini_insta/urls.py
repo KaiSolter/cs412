@@ -33,4 +33,5 @@ urlpatterns = [
     path('api/posts/<int:post_pk>/photos/', PhotoListAPIView.as_view(), name='api_post_photos'),
     path('api/photos/create/', PhotoCreateAPIView.as_view(), name='api_photo_create'),
     path('api/profiles/<int:profile_pk>/feed/', PostFeedListAPIView.as_view(), name='api_profile_feed'),
+    path('api/login/', LoginApiView.as_view(), name='api_login'),
 ]

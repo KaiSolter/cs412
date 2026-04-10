@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react';
 import styles from '../../assets/my_styles';
 import { Text, View, ScrollView, Image } from 'react-native';
+import { useAuth } from '@/context/AuthContext';
 
 const thisProfile = 1;
 const SITE_BASE_URL = 'https://cs-webapps.bu.edu';
@@ -20,6 +21,7 @@ type Photos = {
   timestamp: string;
 };
 
+//method to deal with image_file vs image_url
 const resolvePhotoUri = (photo: Photos): string | null => {
   const candidate = photo.image_file || photo.image_url;
   if (!candidate) {
@@ -38,10 +40,23 @@ const resolvePhotoUri = (photo: Photos): string | null => {
 };
 
 export default function Feed() {
+  const { token } = useAuth();
+
+  const getAuthHeaders = (): Record<string, string> => {
+    if (!token) {
+      return {};
+    }
+
+    return {
+      Authorization: `Token ${token}`,
+    };
+  };
 
   const [feed, setFeed] = useState<Post[]>([]);
   const fetchFeed = async (url: string) =>{
-    const response = await fetch(url);
+    const response = await fetch(url, {
+      headers: getAuthHeaders(),
+    });
     const data = await response.json();
     setFeed(data.results);
   }
@@ -51,7 +66,9 @@ export default function Feed() {
 
   //fetch photos for a given post
   const fetchPhotosForPost = async (postId: number): Promise<Photos[]> => {
-    const response = await fetch(`${API_BASE_URL}/posts/${postId}/photos/`);
+    const response = await fetch(`${API_BASE_URL}/posts/${postId}/photos/`, {
+      headers: getAuthHeaders(),
+    });
     const data = await response.json();
     return data.results ?? [];
   };
