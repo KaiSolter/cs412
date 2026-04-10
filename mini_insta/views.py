@@ -464,12 +464,16 @@ class PostFeedListAPIView(generics.ListAPIView):
 class LoginApiView(generics.GenericAPIView):
     authentication_classes = []
     permission_classes = [AllowAny]
+    serializer_class = LoginSerializer
     
     def post(self, request):
+        serializer = self.get_serializer(data=request.data)
+        serializer.is_valid(raise_exception=True)
+
         user = authenticate(
             request,
-            username=request.data.get('username'),
-            password=request.data.get('password')
+            username=serializer.validated_data.get('username'),
+            password=serializer.validated_data.get('password')
         )
         if user:
             login(request, user)
