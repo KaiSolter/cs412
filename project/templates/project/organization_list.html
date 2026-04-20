@@ -1,0 +1,13 @@
+<!-- File: project/templates/project/organization_list.html -->
+<!-- Author: Kai Solter (ksolter@bu.edu), 4/19/2026 -->
+<!--Description: Template for displaying a list of organizations -->
+
+{% extends 'project/base.html' %}
+{% block content %}
+<h1>Organizations</h1>
+<ul>
+    {% for organization in organizations %}
+        <li>{{ organization.name }}</li>
+    {% endfor %}
+</ul>
+{% endblock %}

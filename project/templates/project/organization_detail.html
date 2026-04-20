@@ -1,0 +1,19 @@
+<!-- File: project/templates/project/organization_detail.html -->
+<!-- Author: Kai Solter (ksolter@bu.edu), 4/19/2026 -->
+<!--Description: Template for displaying a single organizations -->
+
+{% extends 'project/base.html' %}
+{% block content %}
+<h1>Organizations</h1>
+<div>
+    <h2>{{ organization.name }}</h2>
+    <p>{{ organization.description }}</p>
+    <p>{{ organization.owner }}</p>
+    {% if organization.independent %}
+        \<p>Independent</p>
+    {% endif %}
+    {% else %}
+        <p>Institutional</p>
+    {% endelse %}
+</div>
+{% endblock %}
