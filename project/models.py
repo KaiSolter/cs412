@@ -50,7 +50,6 @@ class Article(models.Model):
     title = models.TextField(blank=True)
     url = models.URLField(blank=True)
     summary = models.TextField(blank=True)
-    image_url = models.URLField(blank=True)
     full_text = models.TextField(blank=True)
     published_date = models.DateTimeField(auto_now_add=True)
     organization = models.ForeignKey(Organization, on_delete=models.CASCADE)
