@@ -10,10 +10,10 @@
     <p>{{ organization.description }}</p>
     <p>{{ organization.owner }}</p>
     {% if organization.independent %}
-        \<p>Independent</p>
-    {% endif %}
+        <p>Independent</p>
     {% else %}
         <p>Institutional</p>
-    {% endelse %}
+    {% endif %}
+    <a href="{{ organization.url }}">{{ organization.url }}</a>
 </div>
 {% endblock %}

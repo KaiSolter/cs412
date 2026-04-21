@@ -12,8 +12,18 @@ class Profile(models.Model):
     '''
     username = models.TextField(blank=True)
     join_date = models.DateTimeField(auto_now_add=True)
-    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    user = models.ForeignKey(User, on_delete=models.CASCADE, related_name='project_profiles')
     saved_articles = models.ManyToManyField('Article', blank=True)
+    
+    def get_followed_organizations(self):
+        '''get all organizations this profile is following'''
+        following = FollowOrganization.objects.filter(profile=self)
+        return [follow.organization for follow in following]
+    
+    def get_followed_topics(self):
+        '''get all topics this profile is following'''
+        following = FollowTopic.objects.filter(profile=self)
+        return [follow.topic for follow in following]
 
 class Organization(models.Model):
     '''
@@ -23,6 +33,7 @@ class Organization(models.Model):
     owner = models.TextField(blank=True)
     description = models.TextField(blank=True)
     bias = models.TextField(blank=True)
+    url = models.URLField(blank=True)
     independent = models.BooleanField(default=False)
 
 class Topic(models.Model):

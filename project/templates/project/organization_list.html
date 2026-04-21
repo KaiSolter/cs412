@@ -5,9 +5,13 @@
 {% extends 'project/base.html' %}
 {% block content %}
 <h1>Organizations</h1>
-<ul>
-    {% for organization in organizations %}
-        <li>{{ organization.name }}</li>
+<div>    
+{% for organization in organizations %}
+        <div>
+            <a href="{% url 'organization' organization.pk %}">
+                <h1>{{ organization.name }}</h1>
+            </a>
+        </div>
     {% endfor %}
-</ul>
+</div>
 {% endblock %}

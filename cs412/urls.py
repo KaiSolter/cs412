@@ -30,6 +30,7 @@ urlpatterns = [
     path('marathon_analytics/', include('marathon_analytics.urls')),  #assignment three
     path('voter_analytics/', include('voter_analytics.urls')),  #assignment four
     path('dadjokes/', include('dadjokes.urls')),  #assignment five
+    path('project/', include('project.urls')),  #final project app
 ] 
 
 urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT) 

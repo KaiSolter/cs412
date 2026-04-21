@@ -3,7 +3,27 @@
 <!--Description: Base template for project app -->
 {% load static %}
 <html>
+    <head>
+        <title> News Aggregator </title>
+        <!-- <link rel="stylesheet" type="text/css" href="{% static 'project/style.css' %}"> --> 
+    </head>
     <body>
+        <header>
+            <h1>News Aggregator</h1>
+        </header>
+        <hr />
+        <div>
+            {% if request.user.is_authenticated %} Logged in as : {{request.user}}
+            <form method="post" action="{% url 'logout' %}">
+                {% csrf_token %}
+                <button type="submit">Logout</button>
+            </form>
+            {% else %} Not logged in | <a href="{% url 'login' %}">Login</a> |
+            {% comment %} <a href="{% url 'register' %}">Create Account</a> {% endcomment %}
+            {% endif %}
+        </div>
+
         {% block content %} {% endblock %}
+        {% comment %} Footer will go here later {% endcomment %}
     </body>
 </html>

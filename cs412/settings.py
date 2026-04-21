@@ -49,6 +49,7 @@ INSTALLED_APPS = [
     'marathon_analytics', #example four,
     'voter_analytics', #assignment four
     'dadjokes', #assignment nine
+    'project', #final project app
     'corsheaders', #added for CORS
 ]
 

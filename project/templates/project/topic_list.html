@@ -1,0 +1,17 @@
+<!-- File: project/templates/project/topic_list.html -->
+<!-- Author: Kai Solter (ksolter@bu.edu), 4/20/2026 -->
+<!--Description: Template for displaying a list of topics -->
+
+{% extends 'project/base.html' %}
+{% block content %}
+<h1>Topics</h1>
+<div>    
+{% for topic in topics %}
+        <div>
+            <a href="{% url 'topic' topic.pk %}">
+                <h1>{{ topic.name }}</h1>
+            </a>
+        </div>
+    {% endfor %}
+</div>
+{% endblock %}
