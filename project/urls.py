@@ -11,8 +11,12 @@ urlpatterns = [
     path('organizations/', OrganizationListView.as_view(), name='organizations' ),
     path('topic/<int:pk>/', TopicDetailView.as_view(), name='topic' ),
     path('topics/', TopicListView.as_view(), name='topics' ),
+    path('article/<int:pk>/', ArticleDetailView.as_view(), name='article' ),
+    path('article/<int:pk>/save/', SaveArticleView.as_view(), name='save_article' ),
+    path('article/<int:pk>/unsave/', UnsaveArticleView.as_view(), name='unsave_article' ),
     path('login/', auth_views.LoginView.as_view(template_name='project/login.html'), name='login'),
     #next page is organizations for now, but should be the generic landing page for the app once that is implemented
     path('logout/', auth_views.LogoutView.as_view(next_page='organizations'), name='logout'), 
     path('profile/', ProfileSelfDetailView.as_view(), name='profile_self' ),
+    path('feed/', ArticleFeedListView.as_view(), name='feed' ),
 ]

@@ -1,0 +1,33 @@
+<!-- File: project/templates/project/article_detail.html -->
+<!-- Description: Template for displaying a single article -->
+
+{% extends 'project/base.html' %}
+{% block content %}
+<h1>Article Details</h1>
+<div>
+    <h2>{{ article.title }}</h2>
+    <p><strong>Organization:</strong> {{ article.organization.name }}</p>
+    <p><strong>Topic:</strong> {{ article.topic.topic }}</p>
+    <p><strong>Published:</strong> {{ article.published_date }}</p>
+    <p><strong>Summary:</strong> {{ article.summary }}</p>
+    <p><strong>Full Text:</strong> {{ article.full_text }}</p>
+    <p><a href="{{ article.url }}">Original article link</a></p>
+
+    {% if request.user.is_authenticated %}
+        {% if is_article_saved %}
+            <form method="post" action="{% url 'unsave_article' article.pk %}">
+                {% csrf_token %}
+                <button type="submit">Unsave Article</button>
+            </form>
+        {% else %}
+            <form method="post" action="{% url 'save_article' article.pk %}">
+                {% csrf_token %}
+                <button type="submit">Save Article</button>
+            </form>
+        {% endif %}
+    {% else %}
+        <p><a href="{% url 'login' %}">Log in</a> to save this article.</p>
+    {% endif %}
+</div>
+<p><a href="{% url 'feed' %}">Back to feed</a></p>
+{% endblock %}

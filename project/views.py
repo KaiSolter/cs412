@@ -2,7 +2,7 @@
 # Author: Kai Solter (ksolter@bu.edu), 4/19/2026 
 # Description: views for final project app 
 
-from django.shortcuts import render
+from django.shortcuts import render, redirect, get_object_or_404
 from django.views import View
 from django.views.generic import CreateView, ListView, DetailView, UpdateView, DeleteView
 from django.contrib.auth.mixins import LoginRequiredMixin
@@ -47,6 +47,37 @@ class ArticleDetailView(DetailView):
     model = Article
     template_name = 'project/article_detail.html'
     context_object_name = 'article'
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['is_article_saved'] = False
+
+        if self.request.user.is_authenticated:
+            my_profile = Profile.objects.filter(user=self.request.user).first()
+            if my_profile:
+                context['is_article_saved'] = my_profile.saved_articles.filter(pk=self.object.pk).exists()
+
+        return context
+
+
+class SaveArticleView(LoginRequiredMixin, View):
+    def post(self, request, pk):
+        article = get_object_or_404(Article, pk=pk)
+        my_profile, _ = Profile.objects.get_or_create(
+            user=request.user,
+            defaults={'username': request.user.username}
+        )
+        my_profile.saved_articles.add(article)
+        return redirect('article', pk=article.pk)
+
+
+class UnsaveArticleView(LoginRequiredMixin, View):
+    def post(self, request, pk):
+        article = get_object_or_404(Article, pk=pk)
+        my_profile = Profile.objects.filter(user=request.user).first()
+        if my_profile:
+            my_profile.saved_articles.remove(article)
+        return redirect('article', pk=article.pk)
     
 class FollowedOrganizationListView(ListView):
     model = FollowOrganization

@@ -1,0 +1,27 @@
+<!-- File: project/templates/project/article_feed.html -->
+<!-- Author: Kai Solter (ksolter@bu.edu), 4/23/2026 -->
+<!--Description: Template for displaying the article feed -->
+
+{% extends 'project/base.html' %}
+{% block content %}
+<h1>Article Feed</h1>
+
+{% if articles %}
+    <div>
+    {% for article in articles %}
+        <div>
+            <h2>{{ article.title }}</h2>
+            <p><strong>Organization:</strong> {{ article.organization.name }}</p>
+            <p><strong>Topic:</strong> {{ article.topic.topic }}</p>
+            <p><strong>Published:</strong> {{ article.published_date }}</p>
+            <p>{{ article.summary }}</p>
+            <p><a href="{% url 'article' article.pk %}">View details</a></p>
+            <p><a href="{{ article.url }}">Read article</a></p>
+        </div>
+        <hr />
+    {% endfor %}
+    </div>
+{% else %}
+    <p>No articles available in your feed yet.</p>
+{% endif %}
+{% endblock %}

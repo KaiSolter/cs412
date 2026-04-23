@@ -1,0 +1,8 @@
+{% extends 'project/base.html' %}
+
+{% block content %}
+    <h2>Profile Details</h2>
+    <p><strong>Username:</strong> {{ profile.username|default:profile.user.username }}</p>
+    <p><strong>Account:</strong> {{ profile.user.username }}</p>
+    <p><strong>Joined:</strong> {{ profile.join_date }}</p>
+{% endblock %}
