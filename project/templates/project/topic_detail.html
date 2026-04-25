@@ -7,5 +7,42 @@
 <h1>Topics</h1>
 <div>
     <h2>{{ topic.topic }}</h2>
+    {% if topic.description %}
+        <p>{{ topic.description }}</p>
+    {% endif %}
+    {% if request.user.is_authenticated %}
+        {% if is_following %}
+            <form method="post" action="{% url 'unfollow_topic' topic.pk %}">
+                {% csrf_token %}
+                <button type="submit">Unfollow Topic</button>
+            </form>
+        {% else %}
+            <form method="post" action="{% url 'follow_topic' topic.pk %}">
+                {% csrf_token %}
+                <button type="submit">Follow Topic</button>
+            </form>
+        {% endif %}
+    {% endif %}
 </div>
+
+<hr />
+<h3>Articles Tagged With This Topic</h3>
+
+{% if articles %}
+    <div>
+    {% for article in articles %}
+        <div>
+            <h4>{{ article.title }}</h4>
+            <p><strong>Organization:</strong> {{ article.organization.name }}</p>
+            <p><strong>Published:</strong> {{ article.published_date }}</p>
+            <p>{{ article.summary }}</p>
+            <p><a href="{% url 'article' article.pk %}">View details</a></p>
+            <p><a href="{{ article.url }}">Read article</a></p>
+        </div>
+        <hr />
+    {% endfor %}
+    </div>
+{% else %}
+    <p>No articles are tagged with this topic yet.</p>
+{% endif %}
 {% endblock %}

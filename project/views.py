@@ -32,11 +32,50 @@ class TopicDetailView(DetailView):
     model = Topic
     template_name = 'project/topic_detail.html'
     context_object_name = 'topic'
-    
-class SavedArticlesListView(ListView):
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['articles'] = (
+            Article.objects.filter(topic=self.object)
+            .select_related('organization', 'topic')
+            .order_by('-published_date')
+        )
+        context['is_following'] = False
+        if self.request.user.is_authenticated:
+            my_profile = Profile.objects.filter(user=self.request.user).first()
+            if my_profile:
+                context['is_following'] = FollowTopic.objects.filter(
+                    profile=my_profile, topic=self.object
+                ).exists()
+        return context
+
+
+class FollowTopicView(LoginRequiredMixin, View):
+    def post(self, request, pk):
+        topic = get_object_or_404(Topic, pk=pk)
+        my_profile, _ = Profile.objects.get_or_create(
+            user=request.user,
+            defaults={'username': request.user.username}
+        )
+        FollowTopic.objects.get_or_create(profile=my_profile, topic=topic)
+        return redirect('topic', pk=topic.pk)
+
+
+class UnfollowTopicView(LoginRequiredMixin, View):
+    def post(self, request, pk):
+        topic = get_object_or_404(Topic, pk=pk)
+        my_profile = Profile.objects.filter(user=request.user).first()
+        if my_profile:
+            FollowTopic.objects.filter(profile=my_profile, topic=topic).delete()
+        return redirect('topic', pk=topic.pk)
+
+class ArticleLandingListView(ListView):
     model = Article
-    template_name = 'project/saved_articles.html'
+    template_name = 'project/article_landing.html'
     context_object_name = 'articles'
+
+    def get_queryset(self):
+        return Article.objects.all().order_by('-published_date')
     
 class ArticleFeedListView(ListView):
     model = Article

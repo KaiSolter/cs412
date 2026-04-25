@@ -9,7 +9,7 @@
 {% for topic in topics %}
         <div>
             <a href="{% url 'topic' topic.pk %}">
-                <h1>{{ topic.name }}</h1>
+                <h1>{{ topic.topic }}</h1>
             </a>
         </div>
     {% endfor %}
