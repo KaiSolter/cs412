@@ -76,6 +76,7 @@ nav a:hover {
 /* Form and button sizing for usability */
 input[type="text"],
 input[type="search"],
+input[type="password"],
 textarea,
 select {
     width: 100%;
