@@ -22,8 +22,10 @@ urlpatterns = [
     path('login/', auth_views.LoginView.as_view(template_name='project/login.html'), name='login'),
     path('logout/', auth_views.LogoutView.as_view(next_page='landing'), name='logout'), 
     path('profile/', ProfileSelfDetailView.as_view(), name='profile_self' ),
+    path('profile/edit/', ProfileUpdateView.as_view(), name='profile_edit' ),
     path('feed/', ArticleFeedListView.as_view(), name='feed' ),
     path('followed_organizations/', FollowedOrganizationListView.as_view(), name='followed_organizations' ),
     path('followed_topics/', FollowedTopicListView.as_view(), name='followed_topics' ),
     path('saved_articles/', SavedArticlesListView.as_view(), name='saved_articles' ),
+    path('search/', ArticleSearchView.as_view(), name='article_search' ),
 ]

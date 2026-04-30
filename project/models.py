@@ -12,6 +12,7 @@ class Profile(models.Model):
     Profile Model
     '''
     username = models.TextField(blank=True)
+    bio = models.TextField(blank=True)
     join_date = models.DateTimeField(auto_now_add=True)
     user = models.ForeignKey(User, on_delete=models.CASCADE, related_name='project_profiles')
     saved_articles = models.ManyToManyField('Article', blank=True)

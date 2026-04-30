@@ -1,0 +1,71 @@
+<!-- File: project/templates/project/article_search.html -->
+<!-- Author: Kai Solter (ksolter@bu.edu), 4/30/2026 -->
+<!-- Description: Article search page -->
+{% extends 'project/base.html' %}
+{% block content %}
+<h2>Search Articles</h2>
+
+<form method="post">
+    {% csrf_token %}
+    <div>
+        {{ form.query }}
+        {{ form.include_external.label_tag }} {{ form.include_external }}
+        <button type="submit">Search</button>
+    </div>
+</form>
+
+{% if results is not None %}
+    <hr />
+    <h3>Local Results</h3>
+    {% if results %}
+        <ul>
+            {% for article in results %}
+                <li>
+                    <a href="{% url 'article' article.pk %}"><strong>{{ article.title }}</strong></a>
+                    <span> &mdash; {{ article.organization.name }}</span>
+                    <span> | {{ article.topic.topic }}</span>
+                    <span> | {{ article.published_date }}</span>
+                    {% if article.summary %}
+                        <p>{{ article.summary|truncatewords:30 }}</p>
+                    {% endif %}
+                </li>
+            {% endfor %}
+        </ul>
+    {% else %}
+        <p>No local articles found.</p>
+    {% endif %}
+
+    <h3>External Results (NewsAPI)</h3>
+    {% if external_meta %}
+        {% if external_meta.error %}
+            <p><strong>External search status:</strong> {{ external_meta.error }}</p>
+        {% else %}
+            <p>
+                <strong>External search status:</strong>
+                fetched {{ external_meta.fetched_count }},
+                imported {{ external_meta.imported_count }},
+                already-local {{ external_meta.existing_count }},
+                showing {{ external_meta.shown_count }}.
+            </p>
+        {% endif %}
+    {% endif %}
+    {% if external_results %}
+        <ul>
+            {% for article in external_results %}
+                <li>
+                    <a href="{% url 'article' article.pk %}"><strong>{{ article.title }}</strong></a>
+                    <span> &mdash; {{ article.organization.name }}</span>
+                    <span> | {{ article.topic.topic }}</span>
+                    <span> | {{ article.published_date }}</span>
+                    {% if article.summary %}
+                        <p>{{ article.summary|truncatewords:30 }}</p>
+                    {% endif %}
+                </li>
+            {% endfor %}
+        </ul>
+    {% else %}
+        <p>No external results found.</p>
+    {% endif %}
+{% endif %}
+
+{% endblock %}

@@ -1,0 +1,14 @@
+<!-- File: project/templates/project/profile_form.html -->
+<!-- Author: Kai Solter (ksolter@bu.edu), 4/30/2026 -->
+<!-- Description: Template for updating profile fields -->
+{% extends 'project/base.html' %}
+
+{% block content %}
+<h2>Edit Profile</h2>
+<form method="post">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit">Save</button>
+</form>
+<p><a href="{% url 'profile_self' %}">Back to profile</a></p>
+{% endblock %}

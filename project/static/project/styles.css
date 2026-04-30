@@ -1,18 +1,155 @@
 /* File: project/static/project/styles.css */
-/* Footer styles for persistent bottom navigation */
+/* Author: Kai Solter (ksolter@bu.edu), 4/30/2026 */
+/* Description: Simple, clean global styles for project app */
 
+:root {
+    --bg: #f7f9fc;
+    --surface: #ffffff;
+    --text: #1f2937;
+    --muted: #6b7280;
+    --border: #dbe3ee;
+    --link: #0f4c81;
+    --link-hover: #0b3a63;
+    --button: #0f4c81;
+    --button-hover: #0b3a63;
+}
+
+* {
+    box-sizing: border-box;
+}
+
+html,
 body {
     margin: 0;
-    padding: 12px 16px 64px;
+    padding: 0;
+    background: var(--bg);
+    color: var(--text);
+    font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+    line-height: 1.55;
+}
+
+body {
+    max-width: 980px;
+    margin: 0 auto;
+    padding: 20px 20px 90px;
+}
+
+header h1 {
+    margin: 0;
+    font-size: 2rem;
+}
+
+a {
+    color: var(--link);
+}
+
+a:hover {
+    color: var(--link-hover);
+}
+
+h1,
+h2,
+h3 {
+    line-height: 1.25;
+}
+
+hr {
+    border: 0;
+    border-top: 1px solid var(--border);
+    margin: 16px 0;
+}
+
+nav a {
+    display: inline-block;
+    padding: 8px 10px;
+    margin: 2px 2px;
+    border-radius: 6px;
+    text-decoration: none;
+    font-weight: 600;
+}
+
+nav a:hover {
+    background: #eaf1f8;
+}
+
+input[type="text"],
+input[type="search"],
+textarea,
+select {
+    width: 100%;
+    max-width: 560px;
+    padding: 10px 12px;
+    border: 1px solid #cfd8e3;
+    border-radius: 8px;
+    background: #fff;
+    color: var(--text);
+    font-size: 1rem;
+}
+
+input[type="checkbox"] {
+    width: 18px;
+    height: 18px;
+    vertical-align: middle;
+}
+
+button,
+input[type="submit"] {
+    min-height: 42px;
+    padding: 10px 16px;
+    border: 0;
+    border-radius: 8px;
+    background: var(--button);
+    color: #fff;
+    font-size: 1rem;
+    font-weight: 600;
+    cursor: pointer;
+}
+
+button:hover,
+input[type="submit"]:hover {
+    background: var(--button-hover);
+}
+
+button:focus,
+input:focus,
+textarea:focus,
+select:focus {
+    outline: 2px solid #8db3d8;
+    outline-offset: 1px;
+}
+
+ul {
+    padding-left: 22px;
+}
+
+li {
+    margin-bottom: 10px;
 }
 
 .project-footer {
-    position: fixed;
+    position: fixed !important;
     left: 0;
     right: 0;
     bottom: 0;
-    background: #f0f8ff;
-    border-top: 1px solid #d6e6f2;
+    background: var(--surface);
+    border-top: 1px solid var(--border);
     padding: 10px 16px;
     z-index: 1000;
+}
+
+@media (max-width: 700px) {
+    body {
+        padding: 14px 12px 110px;
+    }
+
+    nav a {
+        font-size: 0.98rem;
+        padding: 9px 8px;
+    }
+
+    button,
+    input[type="submit"] {
+        width: 100%;
+        margin-top: 8px;
+    }
 }
