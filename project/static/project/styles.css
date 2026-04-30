@@ -93,6 +93,16 @@ input[type="checkbox"] {
     vertical-align: middle;
 }
 
+form label {
+    display: block;
+    margin: 10px 0 6px;
+    font-weight: 600;
+}
+
+form div {
+    margin-bottom: 10px;
+}
+
 button,
 input[type="submit"] {
     min-height: 42px;
