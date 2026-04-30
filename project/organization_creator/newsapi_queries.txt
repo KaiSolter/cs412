@@ -1,0 +1,124 @@
+# One NewsAPI query per line (100 queries for comprehensive coverage)
+politics
+economy
+technology
+climate change
+healthcare
+education
+artificial intelligence
+foreign policy
+supreme court
+elections
+pandemic
+covid-19
+vaccine
+mental health
+science
+space
+nasa
+quantum computing
+cybersecurity
+cryptocurrency
+bitcoin
+ethereum
+blockchain
+startups
+venture capital
+startup funding
+stock market
+inflation
+unemployment
+recession
+gdp growth
+interest rates
+federal reserve
+trade war
+tariffs
+immigration policy
+border security
+national security
+defense spending
+military
+weapons
+nuclear energy
+renewable energy
+solar power
+wind energy
+electric vehicles
+autonomous driving
+machine learning
+data science
+cloud computing
+5g networks
+internet privacy
+social media
+misinformation
+fake news
+free speech
+censorship
+cancel culture
+civil rights
+discrimination
+voting rights
+gun control
+gun rights
+abortion
+reproductive rights
+lgbtq rights
+transgender rights
+racial justice
+police reform
+criminal justice
+prisons
+death penalty
+capital punishment
+legal system
+supreme court decisions
+constitutional law
+tax policy
+income tax
+wealth tax
+healthcare reform
+obamacare
+medicare
+medicaid
+social security
+pension crisis
+retirement
+student loans
+education funding
+school choice
+charter schools
+homeschooling
+colleges
+universities
+sports
+nfl
+nba
+nhl
+soccer
+world cup
+olympics
+climate crisis
+global warming
+deforestation
+pollution
+water crisis
+food security
+agriculture
+farming
+genetically modified
+pesticides
+antibiotics
+antibiotic resistance
+ebola
+flu season
+drug overdose
+opioid crisis
+addiction treatment
+legalization
+marijuana
+cannabis
+decriminalization
+police brutality
+protest

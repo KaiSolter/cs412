@@ -1,0 +1,24 @@
+<!-- File: project/templates/project/followed_organizations.html -->
+<!-- Author: Kai Solter (ksolter@bu.edu), 4/30/2026 -->
+<!-- Description: Template for displaying organizations followed by the logged-in user -->
+
+{% extends 'project/base.html' %}
+{% block content %}
+<h1>Followed Organizations</h1>
+
+{% if organizations %}
+    <div>
+    {% for organization in organizations %}
+        <div>
+            <h3>{{ organization.name }}</h3>
+            {% if organization.description %}<p>{{ organization.description }}</p>{% endif %}
+            {% if organization.owner %}<p><strong>Owner:</strong> {{ organization.owner }}</p>{% endif %}
+            <p><a href="{% url 'organization' organization.pk %}">View organization</a></p>
+        </div>
+        <hr />
+    {% endfor %}
+    </div>
+{% else %}
+    <p>You are not following any organizations yet.</p>
+{% endif %}
+{% endblock %}

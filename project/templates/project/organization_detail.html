@@ -7,13 +7,48 @@
 <h1>Organizations</h1>
 <div>
     <h2>{{ organization.name }}</h2>
-    <p>{{ organization.description }}</p>
-    <p>{{ organization.owner }}</p>
+    {% if organization.description %}<p>{{ organization.description }}</p>{% endif %}
+    {% if organization.owner %}<p><strong>Owner:</strong> {{ organization.owner }}</p>{% endif %}
     {% if organization.independent %}
         <p>Independent</p>
     {% else %}
         <p>Institutional</p>
     {% endif %}
-    <a href="{{ organization.url }}">{{ organization.url }}</a>
+    {% if organization.url %}<a href="{{ organization.url }}">{{ organization.url }}</a>{% endif %}
+
+    {% if request.user.is_authenticated %}
+        {% if is_following %}
+            <form method="post" action="{% url 'unfollow_organization' organization.pk %}">
+                {% csrf_token %}
+                <button type="submit">Unfollow Organization</button>
+            </form>
+        {% else %}
+            <form method="post" action="{% url 'follow_organization' organization.pk %}">
+                {% csrf_token %}
+                <button type="submit">Follow Organization</button>
+            </form>
+        {% endif %}
+    {% endif %}
 </div>
+
+<hr />
+<h3>Articles From This Organization</h3>
+
+{% if articles %}
+    <div>
+    {% for article in articles %}
+        <div>
+            <h4>{{ article.title }}</h4>
+            <p><strong>Topic:</strong> {{ article.topic.topic }}</p>
+            <p><strong>Published:</strong> {{ article.published_date }}</p>
+            <p>{{ article.summary }}</p>
+            <p><a href="{% url 'article' article.pk %}">View details</a></p>
+            <p><a href="{{ article.url }}">Read article</a></p>
+        </div>
+        <hr />
+    {% endfor %}
+    </div>
+{% else %}
+    <p>No articles from this organization yet.</p>
+{% endif %}
 {% endblock %}

@@ -1,0 +1,1006 @@
+{
+  "summary": {
+    "created": 194,
+    "updated": 0,
+    "skipped": 5,
+    "would_create": 0,
+    "would_update": 0
+  },
+  "results": [
+    {
+      "action": "created",
+      "organization_id": 6,
+      "name": "The Times of India"
+    },
+    {
+      "action": "created",
+      "organization_id": 7,
+      "name": "Dailymail .com"
+    },
+    {
+      "action": "skipped",
+      "organization_id": 4,
+      "name": "Yahoo Finance"
+    },
+    {
+      "action": "created",
+      "organization_id": 8,
+      "name": "GlobeNewswire"
+    },
+    {
+      "action": "created",
+      "organization_id": 9,
+      "name": "Freerepublic .com"
+    },
+    {
+      "action": "created",
+      "organization_id": 10,
+      "name": "Fox News"
+    },
+    {
+      "action": "created",
+      "organization_id": 11,
+      "name": "New York Post"
+    },
+    {
+      "action": "created",
+      "organization_id": 12,
+      "name": "The Punch"
+    },
+    {
+      "action": "created",
+      "organization_id": 13,
+      "name": "Crypto Briefing"
+    },
+    {
+      "action": "created",
+      "organization_id": 14,
+      "name": "BusinessLine"
+    },
+    {
+      "action": "created",
+      "organization_id": 15,
+      "name": "Pypi.org"
+    },
+    {
+      "action": "created",
+      "organization_id": 16,
+      "name": "ABC News (AU)"
+    },
+    {
+      "action": "created",
+      "organization_id": 17,
+      "name": "Fortune"
+    },
+    {
+      "action": "created",
+      "organization_id": 18,
+      "name": "The Irish Times"
+    },
+    {
+      "action": "created",
+      "organization_id": 19,
+      "name": "BleepingComputer"
+    },
+    {
+      "action": "created",
+      "organization_id": 20,
+      "name": "Vanguard"
+    },
+    {
+      "action": "created",
+      "organization_id": 21,
+      "name": "CBC News"
+    },
+    {
+      "action": "created",
+      "organization_id": 22,
+      "name": "Breitbart News"
+    },
+    {
+      "action": "created",
+      "organization_id": 23,
+      "name": "Slashdot.org"
+    },
+    {
+      "action": "created",
+      "organization_id": 24,
+      "name": "Alltoc .com"
+    },
+    {
+      "action": "created",
+      "organization_id": 25,
+      "name": "Financial Post"
+    },
+    {
+      "action": "created",
+      "organization_id": 26,
+      "name": "Livemint"
+    },
+    {
+      "action": "created",
+      "organization_id": 27,
+      "name": "Japan Today"
+    },
+    {
+      "action": "created",
+      "organization_id": 28,
+      "name": "Forbes"
+    },
+    {
+      "action": "created",
+      "organization_id": 29,
+      "name": "Abcnews .com"
+    },
+    {
+      "action": "created",
+      "organization_id": 30,
+      "name": "Digital Journal"
+    },
+    {
+      "action": "created",
+      "organization_id": 31,
+      "name": "Business Insider"
+    },
+    {
+      "action": "created",
+      "organization_id": 32,
+      "name": "Al Jazeera English"
+    },
+    {
+      "action": "created",
+      "organization_id": 33,
+      "name": "Wnd .com"
+    },
+    {
+      "action": "created",
+      "organization_id": 34,
+      "name": "The-independent .com"
+    },
+    {
+      "action": "created",
+      "organization_id": 35,
+      "name": "The Conversation Africa"
+    },
+    {
+      "action": "created",
+      "organization_id": 36,
+      "name": "TechRadar"
+    },
+    {
+      "action": "created",
+      "organization_id": 37,
+      "name": "USA Today"
+    },
+    {
+      "action": "created",
+      "organization_id": 38,
+      "name": "Raw Story"
+    },
+    {
+      "action": "created",
+      "organization_id": 39,
+      "name": "Globalsecurity.org"
+    },
+    {
+      "action": "created",
+      "organization_id": 40,
+      "name": "The Daily Caller"
+    },
+    {
+      "action": "created",
+      "organization_id": 41,
+      "name": "CBS News"
+    },
+    {
+      "action": "created",
+      "organization_id": 42,
+      "name": "CNBC"
+    },
+    {
+      "action": "created",
+      "organization_id": 43,
+      "name": "New Zealand Herald"
+    },
+    {
+      "action": "created",
+      "organization_id": 44,
+      "name": "Israelnationalnews .com"
+    },
+    {
+      "action": "created",
+      "organization_id": 45,
+      "name": "RTE"
+    },
+    {
+      "action": "created",
+      "organization_id": 46,
+      "name": "Daily Signal"
+    },
+    {
+      "action": "created",
+      "organization_id": 47,
+      "name": "Naturalnews .com"
+    },
+    {
+      "action": "created",
+      "organization_id": 48,
+      "name": "Ibtimes .com.au"
+    },
+    {
+      "action": "created",
+      "organization_id": 49,
+      "name": "PBS"
+    },
+    {
+      "action": "created",
+      "organization_id": 50,
+      "name": "NPR"
+    },
+    {
+      "action": "created",
+      "organization_id": 51,
+      "name": "Mediaite"
+    },
+    {
+      "action": "created",
+      "organization_id": 52,
+      "name": "HuffPost"
+    },
+    {
+      "action": "created",
+      "organization_id": 53,
+      "name": "newsBTC"
+    },
+    {
+      "action": "created",
+      "organization_id": 54,
+      "name": "The Next Web"
+    },
+    {
+      "action": "created",
+      "organization_id": 55,
+      "name": "Plos.org"
+    },
+    {
+      "action": "created",
+      "organization_id": 56,
+      "name": "Slickdeals.net"
+    },
+    {
+      "action": "created",
+      "organization_id": 57,
+      "name": "Newser"
+    },
+    {
+      "action": "created",
+      "organization_id": 58,
+      "name": "CNA"
+    },
+    {
+      "action": "created",
+      "organization_id": 59,
+      "name": "CoinDesk"
+    },
+    {
+      "action": "created",
+      "organization_id": 60,
+      "name": "Bitcoinist"
+    },
+    {
+      "action": "created",
+      "organization_id": 61,
+      "name": "TheJournal.ie"
+    },
+    {
+      "action": "skipped",
+      "organization_id": 22,
+      "name": "Breitbart News"
+    },
+    {
+      "action": "created",
+      "organization_id": 62,
+      "name": "Onefootball .com"
+    },
+    {
+      "action": "created",
+      "organization_id": 63,
+      "name": "Americanthinker .com"
+    },
+    {
+      "action": "created",
+      "organization_id": 64,
+      "name": "Screen Rant"
+    },
+    {
+      "action": "created",
+      "organization_id": 65,
+      "name": "DW (English)"
+    },
+    {
+      "action": "created",
+      "organization_id": 66,
+      "name": "TechCrunch"
+    },
+    {
+      "action": "created",
+      "organization_id": 67,
+      "name": "Independent.ie"
+    },
+    {
+      "action": "skipped",
+      "organization_id": 5,
+      "name": "BBC News"
+    },
+    {
+      "action": "created",
+      "organization_id": 68,
+      "name": "Bleeding Cool News"
+    },
+    {
+      "action": "created",
+      "organization_id": 69,
+      "name": "The Indian Express"
+    },
+    {
+      "action": "created",
+      "organization_id": 70,
+      "name": "Salon"
+    },
+    {
+      "action": "created",
+      "organization_id": 71,
+      "name": "Antaranews .com"
+    },
+    {
+      "action": "created",
+      "organization_id": 72,
+      "name": "The Atlantic"
+    },
+    {
+      "action": "created",
+      "organization_id": 73,
+      "name": "PCMag .com"
+    },
+    {
+      "action": "created",
+      "organization_id": 74,
+      "name": "SiliconANGLE News"
+    },
+    {
+      "action": "created",
+      "organization_id": 75,
+      "name": "Globalresearch.ca"
+    },
+    {
+      "action": "created",
+      "organization_id": 76,
+      "name": "Futurism"
+    },
+    {
+      "action": "created",
+      "organization_id": 77,
+      "name": "Cointelegraph"
+    },
+    {
+      "action": "created",
+      "organization_id": 78,
+      "name": "Slate Magazine"
+    },
+    {
+      "action": "created",
+      "organization_id": 79,
+      "name": "The New Republic"
+    },
+    {
+      "action": "created",
+      "organization_id": 80,
+      "name": "ComicBook .com"
+    },
+    {
+      "action": "created",
+      "organization_id": 81,
+      "name": "Memeorandum .com"
+    },
+    {
+      "action": "created",
+      "organization_id": 82,
+      "name": "Github .com"
+    },
+    {
+      "action": "created",
+      "organization_id": 83,
+      "name": "Reason"
+    },
+    {
+      "action": "skipped",
+      "organization_id": 2,
+      "name": "NBC News"
+    },
+    {
+      "action": "created",
+      "organization_id": 84,
+      "name": "Theflightdeal .com"
+    },
+    {
+      "action": "created",
+      "organization_id": 85,
+      "name": "Princeton University"
+    },
+    {
+      "action": "created",
+      "organization_id": 86,
+      "name": "Khabarhub .com"
+    },
+    {
+      "action": "created",
+      "organization_id": 87,
+      "name": "Common Dreams"
+    },
+    {
+      "action": "created",
+      "organization_id": 88,
+      "name": "Associated Press"
+    },
+    {
+      "action": "created",
+      "organization_id": 89,
+      "name": "CryptoSlate"
+    },
+    {
+      "action": "created",
+      "organization_id": 90,
+      "name": "OilPrice .com"
+    },
+    {
+      "action": "created",
+      "organization_id": 91,
+      "name": "Legalinsurrection .com"
+    },
+    {
+      "action": "created",
+      "organization_id": 92,
+      "name": "Protothema.gr"
+    },
+    {
+      "action": "created",
+      "organization_id": 93,
+      "name": "Hurriyet Daily News"
+    },
+    {
+      "action": "created",
+      "organization_id": 94,
+      "name": "Nature .com"
+    },
+    {
+      "action": "created",
+      "organization_id": 95,
+      "name": "24/7 Wall St."
+    },
+    {
+      "action": "created",
+      "organization_id": 96,
+      "name": "Psychology Today"
+    },
+    {
+      "action": "skipped",
+      "organization_id": 3,
+      "name": "CNN"
+    },
+    {
+      "action": "created",
+      "organization_id": 97,
+      "name": "Barchart .com"
+    },
+    {
+      "action": "created",
+      "organization_id": 98,
+      "name": "Rolling Stone"
+    },
+    {
+      "action": "created",
+      "organization_id": 99,
+      "name": "TheStreet"
+    },
+    {
+      "action": "created",
+      "organization_id": 100,
+      "name": "Gizmodo .com"
+    },
+    {
+      "action": "created",
+      "organization_id": 101,
+      "name": "Deadline"
+    },
+    {
+      "action": "created",
+      "organization_id": 102,
+      "name": "Activistpost .com"
+    },
+    {
+      "action": "created",
+      "organization_id": 103,
+      "name": "Kevinmd .com"
+    },
+    {
+      "action": "created",
+      "organization_id": 104,
+      "name": "Snopes .com"
+    },
+    {
+      "action": "created",
+      "organization_id": 105,
+      "name": "Truthout"
+    },
+    {
+      "action": "created",
+      "organization_id": 106,
+      "name": "CinemaBlend"
+    },
+    {
+      "action": "created",
+      "organization_id": 107,
+      "name": "Foreign Policy"
+    },
+    {
+      "action": "created",
+      "organization_id": 108,
+      "name": "Advocate .com"
+    },
+    {
+      "action": "created",
+      "organization_id": 109,
+      "name": "Mother Jones"
+    },
+    {
+      "action": "created",
+      "organization_id": 110,
+      "name": "Vox"
+    },
+    {
+      "action": "created",
+      "organization_id": 111,
+      "name": "Bringatrailer .com"
+    },
+    {
+      "action": "created",
+      "organization_id": 112,
+      "name": "Wattsupwiththat .com"
+    },
+    {
+      "action": "created",
+      "organization_id": 113,
+      "name": "NASA"
+    },
+    {
+      "action": "created",
+      "organization_id": 114,
+      "name": "Todayifoundout .com"
+    },
+    {
+      "action": "created",
+      "organization_id": 115,
+      "name": "Ewtnnews .com"
+    },
+    {
+      "action": "created",
+      "organization_id": 116,
+      "name": "Thepinknews .com"
+    },
+    {
+      "action": "created",
+      "organization_id": 117,
+      "name": "Rlsbb.to"
+    },
+    {
+      "action": "created",
+      "organization_id": 118,
+      "name": "Us Weekly"
+    },
+    {
+      "action": "created",
+      "organization_id": 119,
+      "name": "Nakedcapitalism .com"
+    },
+    {
+      "action": "created",
+      "organization_id": 120,
+      "name": "Whatjapanthinks .com"
+    },
+    {
+      "action": "created",
+      "organization_id": 121,
+      "name": "Hollywood Reporter"
+    },
+    {
+      "action": "created",
+      "organization_id": 122,
+      "name": "Variety"
+    },
+    {
+      "action": "created",
+      "organization_id": 123,
+      "name": "Sporting News"
+    },
+    {
+      "action": "created",
+      "organization_id": 124,
+      "name": "Substack .com"
+    },
+    {
+      "action": "created",
+      "organization_id": 125,
+      "name": "CNET"
+    },
+    {
+      "action": "created",
+      "organization_id": 126,
+      "name": "Electrek"
+    },
+    {
+      "action": "created",
+      "organization_id": 127,
+      "name": "Thenation .com"
+    },
+    {
+      "action": "created",
+      "organization_id": 128,
+      "name": "Inside Higher Ed"
+    },
+    {
+      "action": "created",
+      "organization_id": 129,
+      "name": "Dianeravitch.net"
+    },
+    {
+      "action": "created",
+      "organization_id": 130,
+      "name": "New York Magazine"
+    },
+    {
+      "action": "created",
+      "organization_id": 131,
+      "name": "Fair Observer"
+    },
+    {
+      "action": "created",
+      "organization_id": 132,
+      "name": "The Verge"
+    },
+    {
+      "action": "created",
+      "organization_id": 133,
+      "name": "New Atlas"
+    },
+    {
+      "action": "created",
+      "organization_id": 134,
+      "name": "Ms. Magazine"
+    },
+    {
+      "action": "created",
+      "organization_id": 135,
+      "name": "Haaretz"
+    },
+    {
+      "action": "created",
+      "organization_id": 136,
+      "name": "ZyCrypto"
+    },
+    {
+      "action": "created",
+      "organization_id": 137,
+      "name": "Crooksandliars .com"
+    },
+    {
+      "action": "created",
+      "organization_id": 138,
+      "name": "Kffhealthnews.org"
+    },
+    {
+      "action": "created",
+      "organization_id": 139,
+      "name": "KQED"
+    },
+    {
+      "action": "created",
+      "organization_id": 140,
+      "name": "Vulture"
+    },
+    {
+      "action": "created",
+      "organization_id": 141,
+      "name": "Bluetracker.gg"
+    },
+    {
+      "action": "created",
+      "organization_id": 142,
+      "name": "Buzzfeed"
+    },
+    {
+      "action": "created",
+      "organization_id": 143,
+      "name": "Lawyersgunsmoneyblog .com"
+    },
+    {
+      "action": "created",
+      "organization_id": 144,
+      "name": "BGR"
+    },
+    {
+      "action": "created",
+      "organization_id": 145,
+      "name": "PR Newswire UK"
+    },
+    {
+      "action": "created",
+      "organization_id": 146,
+      "name": "Decrypt"
+    },
+    {
+      "action": "created",
+      "organization_id": 147,
+      "name": "Science Daily"
+    },
+    {
+      "action": "created",
+      "organization_id": 148,
+      "name": "LADbible"
+    },
+    {
+      "action": "created",
+      "organization_id": 149,
+      "name": "Theregister .com"
+    },
+    {
+      "action": "created",
+      "organization_id": 150,
+      "name": "Gothamist"
+    },
+    {
+      "action": "created",
+      "organization_id": 151,
+      "name": "Popular Science"
+    },
+    {
+      "action": "created",
+      "organization_id": 152,
+      "name": "Cheezburger .com"
+    },
+    {
+      "action": "created",
+      "organization_id": 153,
+      "name": "Inside the Magic"
+    },
+    {
+      "action": "created",
+      "organization_id": 154,
+      "name": "LancasterOnline"
+    },
+    {
+      "action": "created",
+      "organization_id": 155,
+      "name": "KPBS"
+    },
+    {
+      "action": "created",
+      "organization_id": 156,
+      "name": "seattlepi .com"
+    },
+    {
+      "action": "created",
+      "organization_id": 157,
+      "name": "Motorsport .com"
+    },
+    {
+      "action": "created",
+      "organization_id": 158,
+      "name": "Mental Floss"
+    },
+    {
+      "action": "created",
+      "organization_id": 159,
+      "name": "ComputerWeekly .com"
+    },
+    {
+      "action": "created",
+      "organization_id": 160,
+      "name": "Bitcoinfoundation.org"
+    },
+    {
+      "action": "created",
+      "organization_id": 161,
+      "name": "Anime News Network"
+    },
+    {
+      "action": "created",
+      "organization_id": 162,
+      "name": "Futurity: Research News"
+    },
+    {
+      "action": "created",
+      "organization_id": 163,
+      "name": "Bossip"
+    },
+    {
+      "action": "created",
+      "organization_id": 164,
+      "name": "Sputnikglobe .com"
+    },
+    {
+      "action": "created",
+      "organization_id": 165,
+      "name": "Tom's Hardware UK"
+    },
+    {
+      "action": "created",
+      "organization_id": 166,
+      "name": "MarketBeat"
+    },
+    {
+      "action": "created",
+      "organization_id": 167,
+      "name": "Page Six"
+    },
+    {
+      "action": "created",
+      "organization_id": 168,
+      "name": "Wonkette .com"
+    },
+    {
+      "action": "created",
+      "organization_id": 169,
+      "name": "TheWrap"
+    },
+    {
+      "action": "created",
+      "organization_id": 170,
+      "name": "pymnts .com"
+    },
+    {
+      "action": "created",
+      "organization_id": 171,
+      "name": "WWD"
+    },
+    {
+      "action": "created",
+      "organization_id": 172,
+      "name": "ZDNet"
+    },
+    {
+      "action": "created",
+      "organization_id": 173,
+      "name": "autosport .com"
+    },
+    {
+      "action": "created",
+      "organization_id": 174,
+      "name": "The Local Germany"
+    },
+    {
+      "action": "created",
+      "organization_id": 175,
+      "name": "The Cut"
+    },
+    {
+      "action": "created",
+      "organization_id": 176,
+      "name": "Funcheap .com"
+    },
+    {
+      "action": "created",
+      "organization_id": 177,
+      "name": "The Federalist"
+    },
+    {
+      "action": "created",
+      "organization_id": 178,
+      "name": "Universe Today"
+    },
+    {
+      "action": "created",
+      "organization_id": 179,
+      "name": "iTnews"
+    },
+    {
+      "action": "created",
+      "organization_id": 180,
+      "name": "XDA Developers"
+    },
+    {
+      "action": "created",
+      "organization_id": 181,
+      "name": "Twistedsifter .com"
+    },
+    {
+      "action": "created",
+      "organization_id": 182,
+      "name": "YLE News"
+    },
+    {
+      "action": "created",
+      "organization_id": 183,
+      "name": "Mondoweiss"
+    },
+    {
+      "action": "created",
+      "organization_id": 184,
+      "name": "mindbodygreen .com"
+    },
+    {
+      "action": "created",
+      "organization_id": 185,
+      "name": "POLITICO.eu"
+    },
+    {
+      "action": "created",
+      "organization_id": 186,
+      "name": "The Week Magazine"
+    },
+    {
+      "action": "created",
+      "organization_id": 187,
+      "name": "Streetartutopia .com"
+    },
+    {
+      "action": "created",
+      "organization_id": 188,
+      "name": "Marca"
+    },
+    {
+      "action": "created",
+      "organization_id": 189,
+      "name": "The Daily Hodl"
+    },
+    {
+      "action": "created",
+      "organization_id": 190,
+      "name": "ScienceAlert"
+    },
+    {
+      "action": "created",
+      "organization_id": 191,
+      "name": "Techdirt"
+    },
+    {
+      "action": "created",
+      "organization_id": 192,
+      "name": "Hackaday"
+    },
+    {
+      "action": "created",
+      "organization_id": 193,
+      "name": "Paul Tan's Automotive News"
+    },
+    {
+      "action": "created",
+      "organization_id": 194,
+      "name": "National Post"
+    },
+    {
+      "action": "created",
+      "organization_id": 195,
+      "name": "Wired"
+    },
+    {
+      "action": "created",
+      "organization_id": 196,
+      "name": "Boredpanda .com"
+    },
+    {
+      "action": "created",
+      "organization_id": 197,
+      "name": "Juancole .com"
+    },
+    {
+      "action": "created",
+      "organization_id": 198,
+      "name": "Radaronline .com"
+    },
+    {
+      "action": "created",
+      "organization_id": 199,
+      "name": "EFF"
+    }
+  ]
+}

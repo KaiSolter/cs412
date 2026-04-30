@@ -1,0 +1,23 @@
+<!-- File: project/templates/project/followed_topics.html -->
+<!-- Author: Kai Solter (ksolter@bu.edu), 4/30/2026 -->
+<!-- Description: Template for displaying topics followed by the logged-in user -->
+
+{% extends 'project/base.html' %}
+{% block content %}
+<h1>Followed Topics</h1>
+
+{% if topics %}
+    <div>
+    {% for topic in topics %}
+        <div>
+            <h3>{{ topic.topic }}</h3>
+            {% if topic.description %}<p>{{ topic.description }}</p>{% endif %}
+            <p><a href="{% url 'topic' topic.pk %}">View topic</a></p>
+        </div>
+        <hr />
+    {% endfor %}
+    </div>
+{% else %}
+    <p>You are not following any topics yet.</p>
+{% endif %}
+{% endblock %}
