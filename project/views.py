@@ -28,7 +28,7 @@ def search_newsapi(query):
     Search NewsAPI for articles matching query, import them all into the local DB
     (deduplicating by URL), and return status metadata plus imported Article objects.
     """
-    api_key = os.environ.get('NEWSAPI_KEY', '')
+    api_key = os.environ.get('NEWSAPI_KEY', '').strip().strip('"').strip("'")
     if not api_key:
         return {
             'articles': [],

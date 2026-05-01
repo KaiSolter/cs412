@@ -21,7 +21,8 @@ def _load_env_file(env_path: Path) -> None:
 		if not line or line.startswith('#') or '=' not in line:
 			continue
 		key, value = line.split('=', 1)
-		os.environ.setdefault(key.strip(), value.strip())
+		parsed_value = value.strip().strip('"').strip("'")
+		os.environ.setdefault(key.strip(), parsed_value)
 
 
 # Optional secret locations for deployment and local testing.
