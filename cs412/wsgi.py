@@ -26,7 +26,7 @@ def _load_env_file(env_path: Path) -> None:
 
 # Optional secret locations for deployment and local testing.
 for _path in (
-	Path('/home/ksolter/.secrets/newsapi.env'),
+	Path('/home/ugrad/ksolter/.secrets/newsapi.env'),
 	Path(__file__).resolve().parent.parent / '.env',
 ):
 	_load_env_file(_path)
